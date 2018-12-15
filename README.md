@@ -1,4 +1,4 @@
-# Community Hass.io Add-ons: Example
+# Community Hass.io Add-ons: Zigbee2mqtt
 
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
