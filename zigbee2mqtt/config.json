@@ -1,0 +1,42 @@
+{
+  "name": "Zigbee2mqtt",
+  "version": "0.0.2",
+  "slug": "zigbee2mqtt",
+  "description": "Zigbee2mqtt add-on by Community Hass.io Add-ons",
+  "url": "https://github.com/hassio-addons/addon-zigbee2mqtt",
+  "startup": "application",
+  "auto_uart": true,
+  "arch": [
+      "aarch64",
+      "amd64",
+      "armhf",
+      "i386"
+  ],
+  "boot": "auto",
+  "hassio_api": true,
+  "hassio_role": "default",
+  "options": {
+      "homeassistant": true,
+      "permit_join": false,
+      "mqtt_base_topic": "zigbee2mqtt",
+      "mqtt_server": "mqtt://homeassistant",
+      "serial_port": "/dev/ttyACM0",
+      "mqtt_user": "",
+      "mqtt_pass": "",
+      "disable_led": true,
+      "cache_state": true,
+      "log_level": "info"
+    },
+    "schema": {
+      "homeassistant": "bool",
+      "permit_join": "bool",
+      "mqtt_base_topic": "str",
+      "mqtt_server": "str",
+      "serial_port": "str",
+      "mqtt_user": "str?",
+      "mqtt_pass": "str?",
+      "disable_led": "bool?",
+      "cache_state": "bool?",
+      "log_level": "match(^info|debug|warn|error$)?"
+    }
+}
