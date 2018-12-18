@@ -18,6 +18,8 @@
 
 Zigbee2mqtt add-on by Community Hass.io add-ons.
 
+![Zigbee2mqtt Logo](images/logo.png)
+
 ## About
 
 Zigbee2mqtt allows you to use your Zigbee devices without the vendors bridge or gateway.
