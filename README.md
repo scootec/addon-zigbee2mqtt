@@ -20,7 +20,11 @@ Zigbee2mqtt add-on by Community Hass.io add-ons.
 
 ## About
 
-This is an Zigbee2mqtt add-on for Hass.io.
+Zigbee2mqtt allows you to use your Zigbee devices without the vendors bridge or gateway.
+
+It bridges events and allows you to control your Zigbee devices via MQTT. In
+this way you can integrate your Zigbee devices with whatever smart home
+infrastructure you are using.
 
 ## Installation
 
@@ -48,8 +52,8 @@ comparison to installing any other Hass.io add-on.
 
 ## Configuration
 
-Eventought this add-on is just an example add-on, it does come with some
-configuration options to play around with.
+This addon will generate a `configuration.yaml` once upon initial start. Any
+changes after initial configuration should be made in `configuration.yaml`
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
@@ -57,8 +61,16 @@ Example add-on configuration:
 
 ```json
 {
-  "log_level": "info",
-  "seconds_between_quotes": 5
+    "homeassistant": true,
+    "permit_join": false,
+    "mqtt_base_topic": "zigbee2mqtt",
+    "mqtt_server": "mqtt://homeassistant",
+    "serial_port": "/dev/ttyACM0",
+    "mqtt_user": "Maxwell Smart",
+    "mqtt_pass": "Agent_86",
+    "disable_led": true,
+    "cache_state": true,
+    "log_level": "info"
 }
 ```
 
@@ -68,23 +80,52 @@ The `log_level` option controls the level of log output by the addon and can
 be changed to be more or less verbose, which might be useful when you are
 dealing with an unknown issue. Possible values are:
 
-- `trace`: Show every detail, like all called internal functions.
 - `debug`: Shows detailed debug information.
 - `info`: Normal (usually) interesting events.
-- `warning`: Exceptional occurrences that are not errors.
+- `warn`: Exceptional occurrences that are not errors.
 - `error`:  Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
 Please note that each level automatically includes log messages from a
 more severe level, e.g., `debug` also shows `info` messages. By default,
 the `log_level` is set to `info`, which is the recommended setting unless
 you are troubleshooting.
 
-### Option: `seconds_between_quotes`
+### Option: `homeassistant`
 
-Sets the number of seconds between the output of each quote. The value
-must be between `1` and `120` seconds. This value is set to `5` seconds by
-default.
+Enable or disable Home Assistant integration (MQTT discovery).
+
+### Option: `permit_join`
+
+Enable or disable allowing new devices to join.
+
+### Option: `mqtt_base_topic`
+
+MQTT base topic for zigbee2mqtt MQTT messages.
+
+### Option: `mqtt_server`
+
+MQTT server URL. The default should work in most instances.
+
+### Option: `serial_port`
+
+Serial port location of the CC2531 sniffer.
+
+### Option: `mqtt_user`
+
+MQTT server authentication user.
+
+### Option: `mqtt_pass`
+
+MQTT server authentication password.
+
+### Option: `disable_led`
+
+Disable LED of CC2531 USB sniffer
+
+### Option: `cache_state`
+
+Home Assistant requires ALL attributes to be present in ALL MQTT messages send
+by the device. Should be set to `true`.
 
 ## Changelog & Releases
 

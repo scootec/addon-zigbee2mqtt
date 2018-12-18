@@ -12,7 +12,7 @@ WORKDIR /opt/zigbee2mqtt
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Grab latest release
+# Download latest release latest release
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
     tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
@@ -66,7 +66,7 @@ LABEL \
     org.label-schema.name="Zigbee2mqtt" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.url="https://addons.community" \
-    org.label-schema.usage="https://github.com/hassio-addons/addon-example/tree/master/README.md" \
+    org.label-schema.usage="https://github.com/hassio-addons/addon-zigbee2mqtt/tree/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://github.com/hassio-addons/addon-example" \
+    org.label-schema.vcs-url="https://github.com/hassio-addons/addon-zigbee2mqtt" \
     org.label-schema.vendor="Community Hass.io Addons"

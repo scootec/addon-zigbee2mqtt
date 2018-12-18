@@ -6,10 +6,28 @@
 # shellcheck disable=SC1091
 source /usr/lib/hassio-addons/base.sh
 
+# Require permit join boulean
+if ! hass.config.has_value 'permit_join'
+then
+    hass.die 'You need to set a permit join boulean!'
+fi
+
 # Require base topic
 if ! hass.config.has_value 'mqtt_base_topic'
 then
     hass.die 'You need to set a MQTT base topic!'
+fi
+
+# Require base topic
+if ! hass.config.has_value 'mqtt_server'
+then
+    hass.die 'You need to set a MQTT Server!'
+fi
+
+# Require base topic
+if ! hass.device_exists 'serial_port'
+then
+    hass.die 'No device detected at that serial port!'
 fi
 
 # Require username / password
@@ -22,28 +40,3 @@ if ! hass.config.has_value 'mqtt_pass'
 then
     hass.die 'You need to set a password!'
 fi
-
-# Require a secure password
-# if hass.config.has_value 'password' \
-#     && ! hass.config.is_safe_password 'password'; then
-#     hass.die "Please choose a different password, this one is unsafe!"
-# fi
-
-# Check SSL requirements, if enabled
-# if hass.config.true 'ssl'; then
-#     if ! hass.config.has_value 'certfile'; then
-#         hass.die 'SSL is enabled, but no certfile was specified'
-#     fi
-
-#     if ! hass.config.has_value 'keyfile'; then
-#         hass.die 'SSL is enabled, but no keyfile was specified'
-#     fi
-
-#     if ! hass.file_exists "/ssl/$(hass.config.get 'certfile')"; then
-#         hass.die 'The configured certfile is not found'
-#     fi
-
-#     if ! hass.file_exists "/ssl/$(hass.config.get 'keyfile')"; then
-#         hass.die 'The configured keyfile is not found'
-#     fi
-# fi

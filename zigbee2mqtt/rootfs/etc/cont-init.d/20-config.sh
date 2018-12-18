@@ -35,6 +35,7 @@ CONFIG='/opt/zigbee2mqtt/data/configuration.yaml'
 # } >> "$CONFIG"
 
 # Don't touch config if exists
+# Pending upstream change (hopefully) to move device configuration to seperate yaml
 if ! hass.file_exists $CONFIG; then
     # Create new config file
     touch "$CONFIG"
