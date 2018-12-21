@@ -24,8 +24,8 @@ Zigbee2mqtt add-on by Community Hass.io add-ons.
 
 Hass.io-addon based on the fantastic work by frenck and danielwelch.
 
-Zigbee2mqtt bridges events and allows you to control your Zigbee devices via MQTT. In
-this way you can integrate your Zigbee devices with whatever smart home
+Zigbee2mqtt bridges events and allows you to control your Zigbee devices via MQTT.
+In this way you can integrate your Zigbee devices with whatever smart home
 infrastructure you are using.
 
 <!-- ## Installation
