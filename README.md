@@ -22,13 +22,13 @@ Zigbee2mqtt add-on by Community Hass.io add-ons.
 
 ## About
 
-Zigbee2mqtt allows you to use your Zigbee devices without the vendors bridge or gateway.
+Hass.io-addon based on the fantastic work by frenck and danielwelch.
 
-It bridges events and allows you to control your Zigbee devices via MQTT. In
+Zigbee2mqtt bridges events and allows you to control your Zigbee devices via MQTT. In
 this way you can integrate your Zigbee devices with whatever smart home
 infrastructure you are using.
 
-## Installation
+<!-- ## Installation
 
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Hass.io add-on.
@@ -50,7 +50,7 @@ comparison to installing any other Hass.io add-on.
 
 [![Docker Version][version-shield]][microbadger]
 [![Docker Layers][layers-shield]][microbadger]
-[![Docker Pulls][pulls-shield]][dockerhub]
+[![Docker Pulls][pulls-shield]][dockerhub] -->
 
 ## Configuration
 
