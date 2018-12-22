@@ -25,10 +25,10 @@ then
 fi
 
 # Require base topic
-if ! hass.device_exists 'serial_port'
-then
-    hass.die 'No device detected at that serial port!'
-fi
+# if ! hass.device_exists 'serial_port'
+# then
+#     hass.die 'No device detected at that serial port!'
+# fi
 
 # Require username / password
 if ! hass.config.has_value 'mqtt_user'
