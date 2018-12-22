@@ -7,10 +7,10 @@
 source /usr/lib/hassio-addons/base.sh
 
 # Require permit join boulean
-if ! hass.config.has_value 'permit_join'
-then
-    hass.die 'You need to set a permit join boulean!'
-fi
+# if ! hass.config.has_value 'permit_join'
+# then
+#     hass.die 'You need to set a permit join boulean!'
+# fi
 
 # Require base topic
 if ! hass.config.has_value 'mqtt_base_topic'
