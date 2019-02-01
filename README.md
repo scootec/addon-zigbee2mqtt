@@ -1,6 +1,6 @@
 # Community Hass.io Add-ons: Zigbee2mqtt
 
-[![GitHub Release][releases-shield]][releases]
+<!-- [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
 [![License][license-shield]](LICENSE.md)
 
@@ -14,7 +14,7 @@
 
 [![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
 
-[![Support my work on Patreon][patreon-shield]][patreon]
+[![Support my work on Patreon][patreon-shield]][patreon] -->
 
 Zigbee2mqtt add-on by Community Hass.io add-ons.
 
