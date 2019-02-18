@@ -25,14 +25,11 @@ RUN rm -rf data && \
 # Setup base
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        g++=6.4.0-r9 \
-        gcc=6.4.0-r9 \
-        libc-dev=0.7.1-r0 \
-        linux-headers=4.4.6-r2 \
-        make=4.2.1-r2 \
-        py2-pip=10.0.1-r0 \
-        python2-dev=2.7.15-r1 \
-        python2=2.7.15-r1 \
+        g++ \
+        gcc \ \
+        linux-headers \
+        make \
+        python \
     \
     && apk add --no-cache \
         git \
