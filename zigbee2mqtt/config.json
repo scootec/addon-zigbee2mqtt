@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2mqtt",
-  "version": "0.0.10",
+  "version": "dev",
   "slug": "zigbee2mqtt",
   "description": "Zigbee2mqtt add-on by Community Hass.io Add-ons",
   "url": "https://github.com/hassio-addons/addon-zigbee2mqtt",
