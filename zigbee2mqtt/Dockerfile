@@ -32,14 +32,14 @@ RUN \
         make=4.2.1-r2 \
         py2-pip=10.0.1-r0 \
         python2-dev=2.7.15-r1 \
-        python2=2.7.15-r1 \
-    \
-    && apk add --no-cache \
+        python2=2.7.15-r1
+RUN \
+    apk add --no-cache \
         git=2.18.1-r0 \
         nodejs=8.14.0-r0 \
         npm=8.14.0-r0 \
-    \
-    && npm install \
+RUN \
+    npm install \
         --no-optional \
         --only=production \
     \
