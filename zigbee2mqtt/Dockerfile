@@ -13,14 +13,10 @@ WORKDIR /opt/zigbee2mqtt
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Download latest release latest release
-RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
-    tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
-    rm "${ZIGBEE2MQTT_VERSION}.tar.gz"
-    
-# Delete default configuration file & symlink to persistant data
-RUN rm -rf data && \
-    ln -s /data /opt/zigbee2mqtt/data
+# RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
+#     tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
+#     rm "${ZIGBEE2MQTT_VERSION}.tar.gz"
 
 # Setup base
 RUN \
@@ -34,7 +30,12 @@ RUN \
     && apk add --no-cache \
         git \
         nodejs \
-        npm \
+        npm
+# Download latest release latest release
+RUN git clone --depth 1 https://github.com/Koenkk/zigbee2mqtt.git .
+# Delete default configuration file & symlink to persistant data
+RUN rm -rf data && \
+    ln -s /data /opt/zigbee2mqtt/data \
     \
     && npm install \
         --no-optional \
