@@ -26,7 +26,7 @@ RUN rm -rf data && \
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         g++ \
-        gcc \ \
+        gcc \
         linux-headers \
         make \
         python \
