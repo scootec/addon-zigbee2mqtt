@@ -1,9 +1,9 @@
 {
   "name": "Zigbee2mqtt",
-  "version": "dev",
+  "version": "1.0.0",
   "slug": "zigbee2mqtt",
   "description": "Zigbee2mqtt add-on by Community Hass.io Add-ons",
-  "url": "https://github.com/hassio-addons/addon-zigbee2mqtt",
+  "url": "https://github.com/scoootec/addon-zigbee2mqtt",
   "startup": "application",
   "auto_uart": true,
   "arch": [
