@@ -3,7 +3,7 @@ ARG BUILD_FROM=hassioaddons/base:2.3.2
 FROM ${BUILD_FROM}
 
 # Set ARG after FROM
-ARG ZIGBEE2MQTT_VERSION=1.1.1
+ARG ZIGBEE2MQTT_VERSION=1.2.1
 
 COPY rootfs /
 
@@ -12,7 +12,7 @@ WORKDIR /opt/zigbee2mqtt
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-Download latest release latest release
+# Download latest release latest release
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
     tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
@@ -28,7 +28,6 @@ RUN \
         python \
     \
     && apk add --no-cache \
-        git \
         nodejs \
         npm
 # Download latest release latest release
