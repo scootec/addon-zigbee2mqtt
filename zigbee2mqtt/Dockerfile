@@ -30,8 +30,6 @@ RUN \
     && apk add --no-cache \
         nodejs \
         npm
-# Download latest release latest release
-RUN git clone --depth 1 https://github.com/Koenkk/zigbee2mqtt.git .
 # Delete default configuration file & symlink to persistant data
 RUN rm -rf data && \
     ln -s /data /opt/zigbee2mqtt/data \
