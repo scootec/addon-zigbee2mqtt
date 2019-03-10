@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:2.3.1
+ARG BUILD_FROM=hassioaddons/base:2.3.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -12,11 +12,11 @@ WORKDIR /opt/zigbee2mqtt
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Download latest release latest release
-# RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-#     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
-#     tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
-#     rm "${ZIGBEE2MQTT_VERSION}.tar.gz"
+Download latest release latest release
+RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
+    tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
+    rm "${ZIGBEE2MQTT_VERSION}.tar.gz"
 
 # Setup base
 RUN \
