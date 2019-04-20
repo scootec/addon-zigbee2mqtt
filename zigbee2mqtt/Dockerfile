@@ -1,9 +1,9 @@
-ARG BUILD_FROM=hassioaddons/base:2.3.2
+ARG BUILD_FROM=hassioaddons/base:3.1.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Set ARG after FROM
-ARG ZIGBEE2MQTT_VERSION=1.2.1
+ARG ZIGBEE2MQTT_VERSION=1.3.1
 
 COPY rootfs /
 
@@ -21,22 +21,22 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
 # Setup base
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-        g++ \
-        gcc \
-        linux-headers \
-        make \
-        python \
+    g++ \
+    gcc \
+    linux-headers \
+    make \
+    python \
     \
     && apk add --no-cache \
-        nodejs \
-        npm
+    nodejs \
+    npm
 # Delete default configuration file & symlink to persistant data
 RUN rm -rf data && \
     ln -s /data /opt/zigbee2mqtt/data \
     \
     && npm install \
-        --no-optional \
-        --only=production \
+    --no-optional \
+    --only=production \
     \
     && npm cache clear --force \
     \
@@ -55,7 +55,7 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="Franck Nijhof <frenck@addons.community>" \
+    maintainer="Shane Scott <scoootec@example.com>" \
     org.label-schema.description="Zigbee2mqtt add-on by Community Hass.io Add-ons" \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="Zigbee2mqtt" \
