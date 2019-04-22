@@ -6,4 +6,4 @@
 
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
-pm2 start index.js
+pm2-runtime start index.js
