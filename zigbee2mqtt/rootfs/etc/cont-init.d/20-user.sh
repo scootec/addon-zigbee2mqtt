@@ -58,7 +58,7 @@ if ! bashio::fs.file_exists $CONFIG; then
     echo "  password: $(bashio::config 'mqtt_pass')"; \
     echo "serial:"; \
     echo "  port: $(bashio::config 'serial_port')"; \
-    echo "devices: devices.yaml"; \
-    echo "groups: groups.yaml"; \
+    # echo "devices: devices.yaml"; \
+    # echo "groups: groups.yaml"; \
     } >> "$CONFIG"
 fi
