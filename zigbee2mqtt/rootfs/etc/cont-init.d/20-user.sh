@@ -53,12 +53,13 @@ if ! bashio::fs.file_exists $CONFIG; then
     echo "homeassistant: $(bashio::config 'homeassistant')"; \
     echo "permit_join: $(bashio::config 'permit_join')"; \
     echo "mqtt:"; \
+    echo "  base_topic: $(bashio::config 'mqtt_base_topic')"; \
     echo "  server: $(bashio::config 'mqtt_server')"; \
     echo "  user: $(bashio::config 'mqtt_user')"; \
     echo "  password: $(bashio::config 'mqtt_pass')"; \
     echo "serial:"; \
     echo "  port: $(bashio::config 'serial_port')"; \
-    # echo "devices: devices.yaml"; \
-    # echo "groups: groups.yaml"; \
+    echo "devices: devices.yaml"; \
+    echo "groups: groups.yaml"; \
     } >> "$CONFIG"
 fi
