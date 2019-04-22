@@ -28,6 +28,7 @@ RUN \
     make=4.2.1-r2 \
     py2-pip=18.1-r0 \
     python2-dev=2.7.15-r3 \
+    git=2.20.1-r0 \
     \
     && apk add --no-cache \
     nodejs=10.14.2-r0 \
