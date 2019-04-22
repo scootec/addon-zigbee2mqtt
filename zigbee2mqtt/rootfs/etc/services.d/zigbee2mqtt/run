@@ -3,8 +3,6 @@
 # Community Hass.io Add-ons: Zigbee2mqtt
 # Runs Zigbee2mqtt
 # ==============================================================================
-# shellcheck disable=SC1091
-source /usr/lib/hassio-addons/base.sh
 
 cd /opt/zigbee2mqtt
 
