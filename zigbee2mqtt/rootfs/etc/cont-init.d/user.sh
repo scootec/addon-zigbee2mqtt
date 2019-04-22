@@ -44,20 +44,20 @@ CONFIG='/opt/zigbee2mqtt/data/configuration.yaml'
 
 # Don't touch config if exists
 # Pending upstream change (hopefully) to move device configuration to seperate yaml
-if ! bashio::file_exists $CONFIG; then
+if ! bashio::fs.file_exists $CONFIG; then
     # Create new config file
     touch "$CONFIG"
 
     # add configuration
     { 
-    echo "homeassistant: $(bashio::config.get 'homeassistant')"; \
-    echo "permit_join: $(bashio::config.get 'permit_join')"; \
+    echo "homeassistant: $(bashio::config 'homeassistant')"; \
+    echo "permit_join: $(bashio::config 'permit_join')"; \
     echo "mqtt:"; \
-    echo "  server: $(bashio::config.get 'mqtt_server')"; \
-    echo "  user: $(bashio::config.get 'mqtt_user')"; \
-    echo "  password: $(bashio::config.get 'mqtt_pass')"; \
+    echo "  server: $(bashio::config 'mqtt_server')"; \
+    echo "  user: $(bashio::config 'mqtt_user')"; \
+    echo "  password: $(bashio::config 'mqtt_pass')"; \
     echo "serial:"; \
-    echo "  port: $(bashio::config.get 'serial_port')"; \
+    echo "  port: $(bashio::config 'serial_port')"; \
     echo "devices: devices.yaml"; \
     echo "groups: groups.yaml"; \
     } >> "$CONFIG"
