@@ -31,12 +31,11 @@ RUN \
     git \
     \
     && apk add --no-cache \
-    nodejs \
+    nodejs>10.14.2 \
     npm \
     \
     && rm -rf /opt/zigbee2mqtt/data \
     && ln -s /data /opt/zigbee2mqtt/data \
-    && npm install -g pm2 \
     && npm install \
     --no-optional \
     --only=production \
