@@ -28,8 +28,8 @@ RUN \
     python \
     \
     && apk add --no-cache \
-    nodejs \
-    npm
+    nodejs=10.15.3-r0 \
+    npm=10.15.3-r0
 # Delete default configuration file & symlink to persistant data
 RUN rm -rf data && \
     ln -s /data /opt/zigbee2mqtt/data \
