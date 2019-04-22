@@ -6,7 +6,7 @@
 
 # Symlinks configuration directory on first start.
 if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/configuration.yaml'; then
-    rm -rf /data && \
+    rm -rf /opt/zigbee2mqtt/data && \
     ln -s /data /opt/zigbee2mqtt/data \
         || bashio::exit.nok "Could not symlink configuration.yaml."
 fi
