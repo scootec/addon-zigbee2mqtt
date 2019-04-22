@@ -36,6 +36,7 @@ RUN \
     \
     && rm -rf /opt/zigbee2mqtt/data \
     && ln -s /data /opt/zigbee2mqtt/data \
+    && npm install pm2 \
     && npm install \
     --no-optional \
     --only=production \
