@@ -4,8 +4,8 @@
 # Sets up Zigbee2mqtt.
 # ==============================================================================
 
-# Symlinks configuration directory on first start.
-if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/configuration.yaml'; then
+# Symlinks data directory on first start. database.db only present after first start.
+if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/database.db'; then
     bashio::log "Deleting /opt/zigbee2mqtt/data folder."
     rm -rf /opt/zigbee2mqtt/data \
     || bashio::exit.nok "Could not delete /opt/zigbee2mqtt/data folder."
