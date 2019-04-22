@@ -3,7 +3,7 @@ ARG BUILD_FROM=hassioaddons/base:3.1.0
 FROM ${BUILD_FROM}
 
 # Set ARG after FROM
-ARG ZIGBEE2MQTT_VERSION=1.2.1
+ARG ZIGBEE2MQTT_VERSION=1.3.1
 
 COPY rootfs /
 
@@ -21,20 +21,21 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
 # Setup base
 RUN \
     apk add --no-cache --virtual .build-dependencies \
-    g++=8.3.0-r0 \
-    gcc=8.3.0-r0 \
-    libc-dev=0.7.1-r0 \
-    linux-headers=4.18.13-r1 \
-    make=4.2.1-r2 \
-    py2-pip=18.1-r0 \
-    python2-dev=2.7.15-r3 \
-    git=2.20.1-r0 \
+    g++ \
+    gcc \
+    libc-dev \
+    linux-headers \
+    make \
+    py2-pip \
+    python2-dev \
+    git \
     \
     && apk add --no-cache \
-    nodejs=10.14.2-r0 \
-    npm=10.14.2-r0 \
+    nodejs \
+    npm \
     \
     && npm install \
+    --no-optional \
     --only=production \
     \
     && npm cache clear --force \
