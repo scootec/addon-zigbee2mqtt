@@ -34,8 +34,8 @@ RUN \
     nodejs=10.14.2-r0 \
     npm=10.14.2-r0 \
     # Delete default configuration file & symlink to persistant data
-    RUN rm -rf data && \
-    ln -s /data /opt/zigbee2mqtt/data \
+    # RUN rm -rf data && \
+    # ln -s /data /opt/zigbee2mqtt/data \
     \
     && npm install \
     --no-optional \

@@ -4,6 +4,13 @@
 # Sets up Zigbee2mqtt.
 # ==============================================================================
 
+# Symlinks configuration directory on first start.
+if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/configuration.yaml'; then
+    rm -rf /data && \
+    ln -s /data /opt/zigbee2mqtt/data \
+        || bashio::exit.nok "Could not symlink configuration.yaml."
+fi
+
 # Creates devices configuration files on first start.
 if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/devices.yaml'; then
     touch /opt/zigbee2mqtt/data/devices.yaml \
