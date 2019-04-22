@@ -15,23 +15,17 @@
     "permit_join": false,
     "mqtt_base_topic": "zigbee2mqtt",
     "mqtt_server": "mqtt://homeassistant",
-    "serial_port": "/dev/ttyACM0",
     "mqtt_user": "",
     "mqtt_pass": "",
-    "disable_led": true,
-    "cache_state": true,
-    "log_level": "info"
+    "serial_port": "/dev/ttyACM0"
   },
   "schema": {
     "homeassistant": "bool",
     "permit_join": "bool",
     "mqtt_base_topic": "str",
     "mqtt_server": "str",
-    "serial_port": "str",
     "mqtt_user": "str?",
     "mqtt_pass": "str?",
-    "disable_led": "bool?",
-    "cache_state": "bool?",
-    "log_level": "match(^info|debug|warn|error$)?"
+    "serial_port": "str"
   }
 }
