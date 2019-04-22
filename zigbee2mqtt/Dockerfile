@@ -34,6 +34,8 @@ RUN \
     nodejs \
     npm \
     \
+    && rm -rf /opt/zigbee2mqtt/data \
+    && ln -s /data /opt/zigbee2mqtt/data \
     && npm install \
     --no-optional \
     --only=production \

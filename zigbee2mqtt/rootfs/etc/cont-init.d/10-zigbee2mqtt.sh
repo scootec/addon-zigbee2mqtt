@@ -5,15 +5,15 @@
 # ==============================================================================
 
 # Symlinks data directory on first start. database.db only present after first start.
-if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/database.db'; then
-    bashio::log "Deleting /opt/zigbee2mqtt/data folder."
-    rm -rf /opt/zigbee2mqtt/data \
-    || bashio::exit.nok "Could not delete /opt/zigbee2mqtt/data folder."
+# if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/database.db'; then
+#     bashio::log "Deleting /opt/zigbee2mqtt/data folder."
+#     rm -rf /opt/zigbee2mqtt/data \
+#     || bashio::exit.nok "Could not delete /opt/zigbee2mqtt/data folder."
 
-    bashio::log "Symlinking /opt/zigbee2mqtt/data to persistant storage."
-    ln -s /data /opt/zigbee2mqtt/data \
-    || bashio::exit.nok "Could not symlink /opt/zigbee2mqtt/data to persistant storage."
-fi
+#     bashio::log "Symlinking /opt/zigbee2mqtt/data to persistant storage."
+#     ln -s /data /opt/zigbee2mqtt/data \
+#     || bashio::exit.nok "Could not symlink /opt/zigbee2mqtt/data to persistant storage."
+# fi
 
 # Creates devices configuration files on first start.
 if ! bashio::fs.file_exists '/opt/zigbee2mqtt/data/devices.yaml'; then
