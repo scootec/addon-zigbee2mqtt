@@ -31,8 +31,8 @@ RUN \
     git \
     \
     && apk add --no-cache \
-    nodejs>10.15 \
-    npm>10.15 \
+    nodejs=10.15.3-r0 \
+    npm=10.15.3-r0 \
     \
     && rm -rf /opt/zigbee2mqtt/data \
     && ln -s /data /opt/zigbee2mqtt/data \
