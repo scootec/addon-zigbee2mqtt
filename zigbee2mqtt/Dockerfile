@@ -31,18 +31,18 @@ RUN \
     git \
     \
     && apk add --no-cache \
-    nodejs>10.15 \
+    nodejs \
     npm \
     \
     && rm -rf /opt/zigbee2mqtt/data \
     && ln -s /data /opt/zigbee2mqtt/data \
     && npm install \
     --no-optional \
-    --only=production \
-    \
-    && npm cache clear --force \
-    \
-    && apk del --purge --force-broken-world .build-dependencies
+    --only=production
+# \
+# && npm cache clear --force \
+# \
+# && apk del --purge --force-broken-world .build-dependencies
 
 # Build arugments
 ARG BUILD_ARCH
