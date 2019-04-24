@@ -17,7 +17,17 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     && -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && rm -rf /docs /test /images /scripts /docker /LICENSE /README.md /update.sh
+    && rm -rf \ 
+    /opt/zigbee2mqtt/data \ 
+    /opt/zigbee2mqtt/docs \ 
+    /opt/zigbee2mqtt/test \ 
+    /opt/zigbee2mqtt/images \ 
+    /opt/zigbee2mqtt/scripts \ 
+    /opt/zigbee2mqtt/docker \ 
+    /opt/zigbee2mqtt/LICENSE \ 
+    /opt/zigbee2mqtt/README.md \ 
+    /opt/zigbee2mqtt/update.sh \
+    && ln -s /data /opt/zigbee2mqtt/data
 
 # Setup base
 RUN \
@@ -35,8 +45,6 @@ RUN \
     nodejs \
     npm \
     \
-    && rm -rf /opt/zigbee2mqtt/data \
-    && ln -s /data /opt/zigbee2mqtt/data \
     && npm install \
     --no-optional \
     --only=production \
