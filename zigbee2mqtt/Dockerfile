@@ -12,11 +12,12 @@ WORKDIR /opt/zigbee2mqtt
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Download latest release latest release
+# Download latest release & remove unnecessary directories
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    -o "${ZIGBEE2MQTT_VERSION}.tar.gz" && \
-    tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 && \
-    rm "${ZIGBEE2MQTT_VERSION}.tar.gz"
+    && -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
+    && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && rm -rf /docs /test /images /scripts /docker /LICENSE /README.md /update.sh
 
 # Setup base
 RUN \
@@ -31,7 +32,7 @@ RUN \
     git \
     \
     && apk add --no-cache \
-    nodejs-current \
+    nodejs \
     npm \
     \
     && rm -rf /opt/zigbee2mqtt/data \
