@@ -26,7 +26,8 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     /opt/zigbee2mqtt/LICENSE \ 
     /opt/zigbee2mqtt/README.md \ 
     /opt/zigbee2mqtt/update.sh \
-    /opt/zigbee2mqtt/npm-shrinkwrap.json
+    /opt/zigbee2mqtt/npm-shrinkwrap.json \
+    && mkdir /opt/zigbee2mqtt/data
 # && ln -s /data /opt/zigbee2mqtt/data
 
 # Setup base
