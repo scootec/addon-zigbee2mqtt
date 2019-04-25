@@ -6,7 +6,7 @@ ARG ZIGBEE2MQTT_VERSION=1.3.1
 
 COPY rootfs /
 
-WORKDIR /opt
+WORKDIR /opt/zigbee2mqtt
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -46,7 +46,7 @@ RUN \
     npm
 
 # Download latest release. Remove unnecessary directories. Symlink to data dir.
-RUN git clone -b dev --single-branch --depth 1 https://github.com/Koenkk/zigbee2mqtt.git \
+RUN git clone -b dev --single-branch --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt \
     && rm -rf \ 
     /opt/zigbee2mqtt/data \ 
     /opt/zigbee2mqtt/docs \ 
