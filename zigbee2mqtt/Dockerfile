@@ -27,8 +27,7 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     /opt/zigbee2mqtt/README.md \ 
     /opt/zigbee2mqtt/update.sh \
     /opt/zigbee2mqtt/npm-shrinkwrap.json \
-    && mkdir /opt/zigbee2mqtt/data
-# && ln -s /data /opt/zigbee2mqtt/data
+    && ln -s /data /opt/zigbee2mqtt/data
 
 # Setup base
 RUN \
@@ -43,7 +42,7 @@ RUN \
     git \
     udev \
     \
-    && apk add --no-cache \
+    && apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
     nodejs \
     npm \
     \
