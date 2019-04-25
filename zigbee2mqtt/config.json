@@ -17,7 +17,8 @@
     "mqtt_server": "mqtt://homeassistant",
     "mqtt_user": "",
     "mqtt_pass": "",
-    "serial_port": "/dev/ttyACM0"
+    "serial_port": "/dev/ttyACM0",
+    "rtscts": false
   },
   "schema": {
     "homeassistant": "bool",
@@ -26,6 +27,7 @@
     "mqtt_server": "str",
     "mqtt_user": "str?",
     "mqtt_pass": "str?",
-    "serial_port": "str"
+    "serial_port": "str",
+    "rtscts": "bool?"
   }
 }

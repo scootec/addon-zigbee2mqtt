@@ -39,6 +39,11 @@ if ! bashio::config.has_value 'serial_port'; then
     bashio::exit.nok 'You need to set a serial port!'
 fi
 
+# Require rtscts
+if ! bashio::config.has_value 'rtscts'; then
+    bashio::exit.nok 'You need to set rtscts!'
+fi
+
 # set config directory
 CONFIG='/opt/zigbee2mqtt/data/configuration.yaml'
 
@@ -59,6 +64,8 @@ if ! bashio::fs.file_exists $CONFIG; then
     echo "  password: $(bashio::config 'mqtt_pass')"; \
     echo "serial:"; \
     echo "  port: $(bashio::config 'serial_port')"; \
+    echo "advanced:"; \
+    echo "  rtscts: $(bashio::config 'rtscts')"; \
     echo "devices: devices.yaml"; \
     echo "groups: groups.yaml"; \
     } >> "$CONFIG"
