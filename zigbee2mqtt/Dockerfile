@@ -39,21 +39,22 @@ RUN \
     py2-pip \
     python2-dev \
     git \
+    udev \
     \
     && apk add --no-cache \
-    nodejs>10.14.2 \
+    nodejs-current \
     npm \
     \
     && npm install \
     --no-optional \
     --only=production \
-    \
-    && npm cache clear --force \
-    \
-    && apk del --purge --force-broken-world .build-dependencies
+    # \
+    # && npm cache clear --force \
+    # \
+    # && apk del --purge --force-broken-world .build-dependencies
 
-# Build arugments
-ARG BUILD_ARCH
+    # Build arugments
+    ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 ARG BUILD_VERSION
