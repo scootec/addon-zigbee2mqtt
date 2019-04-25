@@ -12,21 +12,21 @@ WORKDIR /opt/zigbee2mqtt
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Download latest release. Remove unnecessary directories. Symlink to data dir.
-RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
-    && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && rm -rf \ 
-    /opt/zigbee2mqtt/data \ 
-    /opt/zigbee2mqtt/docs \ 
-    /opt/zigbee2mqtt/test \ 
-    /opt/zigbee2mqtt/images \ 
-    /opt/zigbee2mqtt/scripts \ 
-    /opt/zigbee2mqtt/docker \ 
-    /opt/zigbee2mqtt/LICENSE \ 
-    /opt/zigbee2mqtt/README.md \ 
-    /opt/zigbee2mqtt/update.sh \
-    && ln -s /data /opt/zigbee2mqtt/data
+# RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
+#     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     && rm -rf \ 
+#     /opt/zigbee2mqtt/data \ 
+#     /opt/zigbee2mqtt/docs \ 
+#     /opt/zigbee2mqtt/test \ 
+#     /opt/zigbee2mqtt/images \ 
+#     /opt/zigbee2mqtt/scripts \ 
+#     /opt/zigbee2mqtt/docker \ 
+#     /opt/zigbee2mqtt/LICENSE \ 
+#     /opt/zigbee2mqtt/README.md \ 
+#     /opt/zigbee2mqtt/update.sh \
+#     && ln -s /data /opt/zigbee2mqtt/data
 
 # Setup base
 RUN \
@@ -43,7 +43,21 @@ RUN \
     \
     && apk add --update --no-cache \
     nodejs \
-    npm \
+    npm
+
+# Download latest release. Remove unnecessary directories. Symlink to data dir.
+RUN git clone -b dev --single-branch --depth 1 https://github.com/Koenkk/zigbee2mqtt.git \
+    && rm -rf \ 
+    /opt/zigbee2mqtt/data \ 
+    /opt/zigbee2mqtt/docs \ 
+    /opt/zigbee2mqtt/test \ 
+    /opt/zigbee2mqtt/images \ 
+    /opt/zigbee2mqtt/scripts \ 
+    /opt/zigbee2mqtt/docker \ 
+    /opt/zigbee2mqtt/LICENSE \ 
+    /opt/zigbee2mqtt/README.md \ 
+    /opt/zigbee2mqtt/update.sh \
+    && ln -s /data /opt/zigbee2mqtt/data \
     \
     && npm install \
     --no-optional \
