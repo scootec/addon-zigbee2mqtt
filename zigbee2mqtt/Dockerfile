@@ -30,7 +30,7 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
 
 # Setup base
 RUN \
-    apk add --no-cache --virtual .build-dependencies \
+    apk add --update --no-cache --virtual .build-dependencies \
     g++ \
     gcc \
     libc-dev \
@@ -41,7 +41,7 @@ RUN \
     git \
     udev \
     \
-    && apk add --no-cache \
+    && apk add --update --no-cache \
     nodejs-current \
     npm \
     \
