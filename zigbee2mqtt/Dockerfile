@@ -6,7 +6,7 @@ ARG ZIGBEE2MQTT_VERSION=1.3.1
 
 COPY rootfs /
 
-WORKDIR /opt/zigbee2mqtt
+WORKDIR /opt
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
