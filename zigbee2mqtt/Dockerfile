@@ -57,6 +57,7 @@ RUN git clone -b dev --single-branch --depth 1 https://github.com/Koenkk/zigbee2
     /opt/zigbee2mqtt/LICENSE \ 
     /opt/zigbee2mqtt/README.md \ 
     /opt/zigbee2mqtt/update.sh \
+    /opt/zigbee2mqtt/npm-shrinkwrap.json \
     && ln -s /data /opt/zigbee2mqtt/data \
     \
     && npm install \
