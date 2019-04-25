@@ -49,6 +49,7 @@ RUN \
     && npm install \
     --no-optional \
     --only=production \
+    --unsafe-perm \
     \
     && npm cache clear --force \
     \
