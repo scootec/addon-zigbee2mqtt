@@ -42,17 +42,17 @@ RUN \
     udev \
     \
     && apk add --update --no-cache \
-    nodejs-current \
+    nodejs \
     npm \
     \
     && npm install \
     --no-optional \
     --only=production \
-    --unsafe-perm
-# \
-# && npm cache clear --force \
-# \
-# && apk del --purge --force-broken-world .build-dependencies
+    --unsafe-perm \
+    \
+    && npm cache clear --force \
+    \
+    && apk del --purge --force-broken-world .build-dependencies
 
 # Build arugments
 ARG BUILD_ARCH
