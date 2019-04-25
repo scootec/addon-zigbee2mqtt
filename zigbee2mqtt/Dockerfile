@@ -41,7 +41,7 @@ RUN \
     git \
     \
     && apk add --no-cache \
-    nodejs \
+    nodejs>10.14.2 \
     npm \
     \
     && npm install \
