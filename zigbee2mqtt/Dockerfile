@@ -42,7 +42,7 @@ RUN \
     udev \
     \
     && apk add --update --no-cache \
-    nodejs \
+    nodejs-current \
     npm
 
 # Download latest release. Remove unnecessary directories. Symlink to data dir.
