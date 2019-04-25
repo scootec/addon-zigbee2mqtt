@@ -47,14 +47,14 @@ RUN \
     \
     && npm install \
     --no-optional \
-    --only=production \
-    # \
-    # && npm cache clear --force \
-    # \
-    # && apk del --purge --force-broken-world .build-dependencies
+    --only=production
+# \
+# && npm cache clear --force \
+# \
+# && apk del --purge --force-broken-world .build-dependencies
 
-    # Build arugments
-    ARG BUILD_ARCH
+# Build arugments
+ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 ARG BUILD_VERSION
