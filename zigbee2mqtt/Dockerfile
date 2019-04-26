@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Download latest release. Remove unnecessary directories. Symlink to data dir.
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
+    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=2 \
     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && rm -rf \ 
     /opt/zigbee2mqtt/data \ 
