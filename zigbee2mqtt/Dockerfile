@@ -16,17 +16,17 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && rm -rf \ 
-    /opt/zigbee2mqtt/data \ 
-    /opt/zigbee2mqtt/docs \ 
-    /opt/zigbee2mqtt/test \ 
-    /opt/zigbee2mqtt/images \ 
-    /opt/zigbee2mqtt/scripts \ 
-    /opt/zigbee2mqtt/docker \ 
-    /opt/zigbee2mqtt/LICENSE \ 
-    /opt/zigbee2mqtt/README.md \ 
-    /opt/zigbee2mqtt/update.sh \
-    /opt/zigbee2mqtt/npm-shrinkwrap.json \
+    # && rm -rf \ 
+    # /opt/zigbee2mqtt/data \ 
+    # /opt/zigbee2mqtt/docs \ 
+    # /opt/zigbee2mqtt/test \ 
+    # /opt/zigbee2mqtt/images \ 
+    # /opt/zigbee2mqtt/scripts \ 
+    # /opt/zigbee2mqtt/docker \ 
+    # /opt/zigbee2mqtt/LICENSE \ 
+    # /opt/zigbee2mqtt/README.md \ 
+    # /opt/zigbee2mqtt/update.sh \
+    # /opt/zigbee2mqtt/npm-shrinkwrap.json \
     && ln -s /data /opt/zigbee2mqtt/data
 
 # Setup base
