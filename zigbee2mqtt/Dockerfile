@@ -16,8 +16,8 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    # && rm -rf \ 
-    # /opt/zigbee2mqtt/data \ 
+    && rm -rf \ 
+    /opt/zigbee2mqtt/data \ 
     # /opt/zigbee2mqtt/docs \ 
     # /opt/zigbee2mqtt/test \ 
     # /opt/zigbee2mqtt/images \ 
