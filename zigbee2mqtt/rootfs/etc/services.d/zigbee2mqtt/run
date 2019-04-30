@@ -6,4 +6,4 @@
 
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
-exec npm start
+exec DEBUG=* npm start
