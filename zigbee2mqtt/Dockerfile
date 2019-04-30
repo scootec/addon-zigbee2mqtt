@@ -2,7 +2,7 @@ ARG BUILD_FROM=hassioaddons/base:3.1.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
-ARG ZIGBEE2MQTT_VERSION=1.2.1
+ARG ZIGBEE2MQTT_VERSION=1.3.1
 
 COPY rootfs /
 
@@ -18,15 +18,15 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && rm -rf \ 
     /opt/zigbee2mqtt/data \ 
-    # /opt/zigbee2mqtt/docs \ 
-    # /opt/zigbee2mqtt/test \ 
-    # /opt/zigbee2mqtt/images \ 
-    # /opt/zigbee2mqtt/scripts \ 
-    # /opt/zigbee2mqtt/docker \ 
-    # /opt/zigbee2mqtt/LICENSE \ 
-    # /opt/zigbee2mqtt/README.md \ 
-    # /opt/zigbee2mqtt/update.sh \
-    # /opt/zigbee2mqtt/npm-shrinkwrap.json \
+    /opt/zigbee2mqtt/docs \ 
+    /opt/zigbee2mqtt/test \ 
+    /opt/zigbee2mqtt/images \ 
+    /opt/zigbee2mqtt/scripts \ 
+    /opt/zigbee2mqtt/docker \ 
+    /opt/zigbee2mqtt/LICENSE \ 
+    /opt/zigbee2mqtt/README.md \ 
+    /opt/zigbee2mqtt/update.sh \
+    /opt/zigbee2mqtt/npm-shrinkwrap.json \
     && ln -s /data /opt/zigbee2mqtt/data
 
 # Setup base
@@ -47,8 +47,8 @@ RUN \
     npm \
     \
     && npm install \
-    # --no-optional \
-    # --only=production \
+    --no-optional \
+    --only=production \
     --unsafe-perm \
     \
     && npm cache clear --force \
