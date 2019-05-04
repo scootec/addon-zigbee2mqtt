@@ -44,12 +44,6 @@ if ! bashio::config.has_value 'rtscts'; then
     bashio::exit.nok 'You need to set rtscts!'
 fi
 
-# Debug option
-if bashio::config.true 'zigbee_shepherd_debug'; then
-    bashio::log "Enabling zigbee shepard and zigbee2mqtt debug logging..."
-    export DEBUG="*"
-fi
-
 # set config directory
 CONFIG='/opt/zigbee2mqtt/data/configuration.yaml'
 
