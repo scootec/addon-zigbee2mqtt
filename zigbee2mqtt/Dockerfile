@@ -11,11 +11,42 @@ WORKDIR /opt/zigbee2mqtt
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Setup base
+RUN apk add --no-cache --virtual .build-dependencies \
+    g++ \
+    gcc \
+    libc-dev \
+    linux-headers \
+    make \
+    py2-pip \
+    python2-dev \
+    git \
+    udev \
+    \
+    && apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    nodejs \
+    npm
+
+# # Download latest release. Remove unnecessary directories. Symlink to data dir.
+# RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
+#     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+#     && rm -rf \ 
+#     /opt/zigbee2mqtt/data \ 
+#     /opt/zigbee2mqtt/docs \ 
+#     /opt/zigbee2mqtt/test \ 
+#     /opt/zigbee2mqtt/images \ 
+#     /opt/zigbee2mqtt/scripts \ 
+#     /opt/zigbee2mqtt/docker \ 
+#     /opt/zigbee2mqtt/LICENSE \ 
+#     /opt/zigbee2mqtt/README.md \ 
+#     /opt/zigbee2mqtt/update.sh \
+#     /opt/zigbee2mqtt/npm-shrinkwrap.json \
+#     && ln -s /data /opt/zigbee2mqtt/data
+
 # Download latest release. Remove unnecessary directories. Symlink to data dir.
-RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
-    && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+RUN git clone -b dev --single-branch --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt \
     && rm -rf \ 
     /opt/zigbee2mqtt/data \ 
     /opt/zigbee2mqtt/docs \ 
@@ -29,24 +60,8 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     /opt/zigbee2mqtt/npm-shrinkwrap.json \
     && ln -s /data /opt/zigbee2mqtt/data
 
-# Setup base
-RUN \
-    apk add --no-cache --virtual .build-dependencies \
-    g++ \
-    gcc \
-    libc-dev \
-    linux-headers \
-    make \
-    py2-pip \
-    python2-dev \
-    git \
-    udev \
-    \
-    && apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    nodejs \
-    npm \
-    \
-    && npm install \
+# Install the above and remove unused dependencies
+RUN npm install \
     --no-optional \
     --only=production \
     --unsafe-perm \

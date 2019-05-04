@@ -18,7 +18,8 @@
     "mqtt_user": "",
     "mqtt_pass": "",
     "serial_port": "/dev/ttyACM0",
-    "rtscts": false
+    "rtscts": false,
+    "zigbee_shepherd_debug": false
   },
   "schema": {
     "homeassistant": "bool",
@@ -28,6 +29,7 @@
     "mqtt_user": "str?",
     "mqtt_pass": "str?",
     "serial_port": "str",
-    "rtscts": "bool?"
+    "rtscts": "bool?",
+    "zigbee_shepherd_debug": "bool?"
   }
 }
