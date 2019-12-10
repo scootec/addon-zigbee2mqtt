@@ -19,7 +19,6 @@ RUN apk add --no-cache --virtual .build-dependencies \
     git \
     udev \
     python2 \
-    tar \
     \
     && apk add --no-cache \
     nodejs \
@@ -28,8 +27,9 @@ RUN apk add --no-cache --virtual .build-dependencies \
 # # Download latest release. Remove unnecessary directories. Symlink to data dir.
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
-    && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && mv zigbee2mqtt-${ZIGBEE2MQTT_VERSION}/* . \
+    # && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && find . \
     -not -path './lib/*' \
     -not -name 'index.js' \
