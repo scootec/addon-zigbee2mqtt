@@ -27,7 +27,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
 # # Download latest release. Remove unnecessary directories. Symlink to data dir.
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && tar -xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && mv zigbee2mqtt-${ZIGBEE2MQTT_VERSION}/* . \
     # && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && find . \
