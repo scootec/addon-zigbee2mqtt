@@ -19,6 +19,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
     git \
     udev \
     python2 \
+    tar \
     \
     && apk add --no-cache \
     nodejs \
