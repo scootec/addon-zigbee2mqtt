@@ -1,8 +1,7 @@
-ARG BUILD_FROM=hassioaddons/base:3.1.0
+ARG BUILD_FROM=hassioaddons/base:5.0.3
+ARG ZIGBEE2MQTT_VERSION=1.7.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
-
-ARG ZIGBEE2MQTT_VERSION=1.3.1
 
 COPY rootfs /
 
@@ -15,56 +14,31 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apk add --no-cache --virtual .build-dependencies \
     g++ \
     gcc \
-    libc-dev \
     linux-headers \
     make \
-    py2-pip \
-    python2-dev \
     git \
     udev \
+    python2 \
     \
-    && apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    && apk add --no-cache \
     nodejs \
     npm
 
 # # Download latest release. Remove unnecessary directories. Symlink to data dir.
-# RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-#     -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-#     && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
-#     && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
-#     && rm -rf \ 
-#     /opt/zigbee2mqtt/data \ 
-#     /opt/zigbee2mqtt/docs \ 
-#     /opt/zigbee2mqtt/test \ 
-#     /opt/zigbee2mqtt/images \ 
-#     /opt/zigbee2mqtt/scripts \ 
-#     /opt/zigbee2mqtt/docker \ 
-#     /opt/zigbee2mqtt/LICENSE \ 
-#     /opt/zigbee2mqtt/README.md \ 
-#     /opt/zigbee2mqtt/update.sh \
-#     /opt/zigbee2mqtt/npm-shrinkwrap.json \
-#     && ln -s /data /opt/zigbee2mqtt/data
-
-# Download latest release. Remove unnecessary directories. Symlink to data dir.
-RUN git clone -b dev --single-branch --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt \
-    && rm -rf \ 
-    /opt/zigbee2mqtt/data \ 
-    /opt/zigbee2mqtt/docs \ 
-    /opt/zigbee2mqtt/test \ 
-    /opt/zigbee2mqtt/images \ 
-    /opt/zigbee2mqtt/scripts \ 
-    /opt/zigbee2mqtt/docker \ 
-    /opt/zigbee2mqtt/LICENSE \ 
-    /opt/zigbee2mqtt/README.md \ 
-    /opt/zigbee2mqtt/update.sh \
-    /opt/zigbee2mqtt/npm-shrinkwrap.json \
-    && ln -s /data /opt/zigbee2mqtt/data
-
-# Install the above and remove unused dependencies
-RUN npm install \
-    --no-optional \
-    --only=production \
-    --unsafe-perm \
+RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    -o "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && tar xzvf "${ZIGBEE2MQTT_VERSION}.tar.gz" --strip-components=1 \
+    && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    && find . \
+    -not -path './lib/*' \
+    -not -name 'index.js' \
+    -not -name 'package.json' \
+    -delete \
+    && ln -s /data /opt/zigbee2mqtt/data \
+    # Install the above and remove unused dependencies
+    && npm install \
+    --unsafe-perm \ 
+    --production \
     \
     && npm cache clear --force \
     \
