@@ -34,8 +34,7 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     -not -name 'index.js' \
     -not -name 'package.json' \
     -not -name 'npm-shrinkwrap.json' \
-    # -delete \
-    -print0 | xargs -0 rm \
+    -delete \
     && ln -s /data /opt/zigbee2mqtt/data \
     # Install the above and remove unused dependencies
     # && npm install \
