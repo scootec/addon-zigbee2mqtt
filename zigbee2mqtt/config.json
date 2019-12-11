@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2mqtt",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "slug": "zigbee2mqtt",
   "description": "Zigbee2mqtt add-on by Community Hass.io Add-ons",
   "url": "https://github.com/scoootec/addon-zigbee2mqtt",
@@ -10,7 +10,7 @@
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
-  "map": "share:rw",
+  "map": ["share:rw"],
   "options": {
     "homeassistant": true,
     "permit_join": false,
