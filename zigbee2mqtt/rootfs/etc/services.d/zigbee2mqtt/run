@@ -6,10 +6,4 @@
 
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
-# Debug option
-if bashio::config.true 'zigbee_shepherd_debug'; then
-    bashio::log "Enabling zigbee shepard and zigbee2mqtt debug logging..."
-    export DEBUG=zigbee-shepherd*
-fi
-
 exec npm start
