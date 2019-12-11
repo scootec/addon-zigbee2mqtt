@@ -13,13 +13,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-    g++ \
-    gcc \
-    linux-headers \
     make \
-    git \
+    gcc \
+    g++ \
+    python \
+    linux-headers \
     udev \
-    python2 \
+    git \
     \
     && apk add --no-cache \
     nodejs \
@@ -29,21 +29,28 @@ RUN apk add --no-cache --virtual .build-dependencies \
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "release.tar.gz" \
     && tar -xzvf "release.tar.gz" --strip-components=1 \
-    # && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && find . \
     -not -path './lib/*' \
     -not -name 'index.js' \
     -not -name 'package.json' \
-    -delete \
+    -not -name 'npm-shrinkwrap.json' \
+    # -delete \
+    -print0 | xargs -0 rm \
     && ln -s /data /opt/zigbee2mqtt/data \
     # Install the above and remove unused dependencies
+    # && npm install \
+    # --unsafe-perm \ 
+    # --production \
     && npm install \
-    --unsafe-perm \ 
-    --production \
+    --no-audit \
+    --no-optional \
+    --no-update-notifier \
+    --only=production \
+    --unsafe-perm \
     \
     && npm cache clear --force \
     \
-    && apk del --purge --force-broken-world .build-dependencies
+    && apk del --purge .build-dependencies
 
 # Build arugments
 ARG BUILD_ARCH
