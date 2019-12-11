@@ -1,5 +1,5 @@
 ARG BUILD_FROM=hassioaddons/base:5.0.3
-ARG ZIGBEE2MQTT_VERSION=1.7.1
+ENV ZIGBEE2MQTT_VERSION=1.7.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -25,10 +25,9 @@ RUN apk add --no-cache --virtual .build-dependencies \
     npm
 
 # # Download latest release. Remove unnecessary directories. Symlink to data dir.
-RUN curl -sLv "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
-    -o "download.tar.gz" \
-    && tar -xvf "download.tar.gz" \
-    && mv zigbee2mqtt-${ZIGBEE2MQTT_VERSION}/* . \
+RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+    -o "release.tar.gz" \
+    && tar -xzvf "release.tar.gz" --strip-components=1 \
     # && rm "${ZIGBEE2MQTT_VERSION}.tar.gz" \
     && find . \
     -not -path './lib/*' \
