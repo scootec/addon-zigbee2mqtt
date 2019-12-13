@@ -11,6 +11,13 @@ if ! bashio::fs.directory_exists '/config/zigbee2mqtt'; then
         || bashio::exit.nok "Could not create /config/zigbee2mqtt."
 fi
 
+# Creates configuration.yaml on first start.
+if ! bashio::fs.file_exists '/config/zigbee2mqtt/configuration.yaml'; then
+    bashio::log "Creating configuration.yaml."
+    touch /config/zigbee2mqtt/configuration.yaml \
+        || bashio::exit.nok "Could not create configuration.yaml."
+fi
+
 # Creates devices configuration files on first start.
 if ! bashio::fs.file_exists '/config/zigbee2mqtt/devices.yaml'; then
     bashio::log "Creating devices.yaml."
