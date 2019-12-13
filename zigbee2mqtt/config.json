@@ -10,7 +10,7 @@
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
-  "map": ["share:rw"],
+  "map": ["config:rw"],
   "options": {
     "homeassistant": true,
     "permit_join": false,
