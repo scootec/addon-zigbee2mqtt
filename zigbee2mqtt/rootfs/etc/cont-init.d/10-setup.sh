@@ -33,7 +33,7 @@ if ! bashio::fs.file_exists '/config/zigbee2mqtt/groups.yaml'; then
 fi
 
 # Check for empty config file
-if [-s '/config/zigbee2mqtt/configuration.yaml']; then
+if [ -s '/config/zigbee2mqtt/configuration.yaml']; then
     bashio::exit.nok "Your configuration.yaml is empty! Please add a configuration and restart the addon."
 fi
 
