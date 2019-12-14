@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2mqtt",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "slug": "zigbee2mqtt",
   "description": "Zigbee2mqtt add-on by Community Hass.io Add-ons",
   "url": "https://github.com/scoootec/addon-zigbee2mqtt",
@@ -11,26 +11,6 @@
   "hassio_api": true,
   "hassio_role": "default",
   "map": ["config:rw"],
-  "options": {
-    "homeassistant": true,
-    "permit_join": false,
-    "mqtt_base_topic": "zigbee2mqtt",
-    "mqtt_server": "mqtt://homeassistant",
-    "mqtt_user": "",
-    "mqtt_pass": "",
-    "serial_port": "/dev/ttyACM0",
-    "rtscts": false,
-    "zigbee_shepherd_debug": false
-  },
-  "schema": {
-    "homeassistant": "bool",
-    "permit_join": "bool",
-    "mqtt_base_topic": "str",
-    "mqtt_server": "str",
-    "mqtt_user": "str?",
-    "mqtt_pass": "str?",
-    "serial_port": "str",
-    "rtscts": "bool?",
-    "zigbee_shepherd_debug": "bool?"
-  }
+  "options": {},
+  "schema": {}
 }
