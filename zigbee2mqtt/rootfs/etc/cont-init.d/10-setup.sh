@@ -28,9 +28,13 @@ fi
 # Creates groups configuration files on first start.
 if ! bashio::fs.file_exists '/config/zigbee2mqtt/groups.yaml'; then
     bashio::log "Creating groups.yaml."
-    touch /config/zigbee2mqtt/groups.yaml
-    bashio::exit.nok "Please add your configuration to /config/zigbee2mqtt and restart addon." \
+    touch /config/zigbee2mqtt/groups.yaml \
         || bashio::exit.nok "Could not create groups.yaml."
+fi
+
+# Check for empty config file
+if [-s '/config/zigbee2mqtt/configuration.yaml']; then
+    bashio::exit.nok "Your configuration.yaml is empty! Please add a configuration and restart the addon."
 fi
 
 # Links /opt/zigbee2mqtt/data to /config/zigbee2mqtt
