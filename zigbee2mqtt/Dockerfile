@@ -2,7 +2,7 @@ ARG BUILD_FROM=hassioaddons/base:5.0.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
-ENV ZIGBEE2MQTT_VERSION=1.7.1
+ENV ZIGBEE2MQTT_VERSION=1.8.0
 
 COPY rootfs /
 
