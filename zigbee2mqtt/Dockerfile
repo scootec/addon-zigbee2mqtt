@@ -13,13 +13,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-    make \
-    gcc \
+    curl \
     g++ \
-    python \
-    linux-headers \
-    udev \
+    gcc \
     git \
+    linux-headers \
+    make \
+    python2 \
+    udev \
     \
     && apk add --no-cache \
     nodejs \
