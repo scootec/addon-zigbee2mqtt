@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Community Hass.io Add-ons: Zigbee2mqtt
-# Runs Zigbee2mqtt
+# Home Assistant Community Add-on: Zigbee2MQTT
+# Starts Zigbee2MQTT
 # ==============================================================================
 
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
