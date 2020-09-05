@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Community Hass.io Add-ons: Zigbee2mqtt
-# Sets up Zigbee2mqtt.
+# Home Assistant Community Add-on: Zigbee2MQTT
+# Sets up Zigbee2MQTT.
 # ==============================================================================
 
 # Creates configuration folder if it does not exist.
