@@ -26,7 +26,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
     nodejs \
     npm
 
-# # Download latest release. Remove unnecessary directories. Symlink to data dir.
+# # Download latest release. Remove unnecessary directories.
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "release.tar.gz" \
     && tar -xzvf "release.tar.gz" --strip-components=1 \
