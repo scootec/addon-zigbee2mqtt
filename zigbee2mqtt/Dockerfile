@@ -23,8 +23,8 @@ RUN apk add --no-cache --virtual .build-dependencies \
     udev \
     \
     && apk add --no-cache \
-    nodejs \
-    npm
+    nodejs=12.18.3-r0 \
+    npm=12.18.3-r0
 
 # # Download latest release. Remove unnecessary directories.
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
