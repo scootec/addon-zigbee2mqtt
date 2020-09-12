@@ -29,7 +29,8 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
     username=$(bashio::services "mqtt" "username")
     password=$(bashio::services "mqtt" "password")
     {
-        echo "homeassistant: true"
+        # TODO Change this to true
+        echo "homeassistant: false"
         echo "permit_join: false"
         echo "mqtt:"
         echo "  base_topic: zigbee2mqtt"
