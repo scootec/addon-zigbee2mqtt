@@ -38,8 +38,8 @@ if [ ! -s '/share/addon-zigbee2mqtt/configuration.yaml' ]; then
 fi
 
 # Links /opt/zigbee2mqtt/data to /share/addon-zigbee2mqtt
-if ! bashio::fs.directory_exists '/opt/zigbee2mqtt/data'; then
-    bashio::log "Linking /opt/zigbee2mqtt/data to /share/addon-zigbee2mqtt."
-    ln -s /share/addon-zigbee2mqtt /opt/zigbee2mqtt/data \
-        || bashio::exit.nok "Could not create symbolic link."
-fi
+# if ! bashio::fs.directory_exists '/opt/zigbee2mqtt/data'; then
+#     bashio::log "Linking /opt/zigbee2mqtt/data to /share/addon-zigbee2mqtt."
+#     ln -s /share/addon-zigbee2mqtt /opt/zigbee2mqtt/data \
+#         || bashio::exit.nok "Could not create symbolic link."
+# fi
