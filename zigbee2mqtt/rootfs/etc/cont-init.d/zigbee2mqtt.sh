@@ -48,6 +48,9 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
         || bashio::exit.nok "Default configuration failed! Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
 fi
 
+SERIAL_DEVICES=bashio::hardware.serial
+bashio::log.info "Serial Devices $SERIAL_DEVICES"
+
 # Creates devices configuration files on first start.
 if ! bashio::fs.file_exists '/config/zigbee2mqtt/devices.yaml'; then
     bashio::log.info "Creating devices.yaml."
