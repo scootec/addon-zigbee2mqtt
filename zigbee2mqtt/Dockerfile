@@ -4,7 +4,8 @@ FROM ${BUILD_FROM}
 
 ENV ZIGBEE2MQTT_VERSION=1.14.4
 
-COPY rootfs /
+# Copy /opt
+COPY rootfs/opt /opt
 
 WORKDIR /opt/zigbee2mqtt
 
@@ -26,7 +27,7 @@ RUN apk add --no-cache --virtual .build-dependencies \
     nodejs=12.18.3-r0 \
     npm=12.18.3-r0
 
-# # Download latest release. Remove unnecessary directories.
+# Download latest release. Remove unnecessary directories.
 RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "release.tar.gz" \
     && tar -xzvf "release.tar.gz" --strip-components=1 \
@@ -46,6 +47,9 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     && npm cache clear --force \
     \
     && apk del --purge .build-dependencies
+
+# Copy /etc
+COPY rootfs/etc /etc
 
 # Build arugments
 ARG BUILD_ARCH
