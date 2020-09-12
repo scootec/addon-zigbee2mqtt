@@ -29,8 +29,7 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
     username=$(bashio::services "mqtt" "username")
     password=$(bashio::services "mqtt" "password")
     {
-        # TODO: Change this to true
-        echo "homeassistant: false"
+        echo "homeassistant: true"
         echo "permit_join: false"
         echo "mqtt:"
         echo "  base_topic: zigbee2mqtt"
@@ -39,13 +38,10 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
         echo "  password: $password"
         echo "serial:"
         echo "  port: null"
-        # TODO: Remove ths if not needed
-        # echo "  adapter: null"
         echo "advanced:"
         echo "  log_output:"
         echo "    - console"
-        # TODO: Change this key to GENERATE
-        echo "  network_key: [245, 104, 21, 151, 220, 30, 40, 58, 217, 85, 120, 20, 111, 144, 136, 128]"
+        echo "  network_key: GENERATE"
         echo "devices: devices.yaml"
         echo "groups: groups.yaml"
     } > /config/zigbee2mqtt/configuration.yaml \
