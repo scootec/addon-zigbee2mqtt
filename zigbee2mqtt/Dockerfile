@@ -4,8 +4,8 @@ FROM ${BUILD_FROM}
 
 ENV ZIGBEE2MQTT_VERSION=1.14.4
 
-# Copy /opt
-COPY rootfs/opt /opt
+# Create Zigbee2MQTT folder
+RUN mkdir -p /opt/zigbee2mqtt
 
 WORKDIR /opt/zigbee2mqtt
 
@@ -49,7 +49,7 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     && apk del --purge .build-dependencies
 
 # Copy /etc
-COPY rootfs/etc /etc
+COPY rootfs /
 
 # Build arugments
 ARG BUILD_ARCH
