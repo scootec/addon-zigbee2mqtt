@@ -23,19 +23,27 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
     if ! bashio::services.available "mqtt"; then
         bashio::exit.nok "Home Assistant MQTT service is not available. Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
     fi
+    declare ADAPTER
+    for DEVICE in $(bashio::hardware.serial); do
+        if [[ ${DEVICE} == *"serial/by-id"* ]]; then
+            ADAPTER=${DEVICE}
+            break
+        fi
+    done
+
     bashio::log.info "Creating default configuration..."
-    host=$(bashio::services "mqtt" "host")
-    port=$(bashio::services "mqtt" "port")
-    username=$(bashio::services "mqtt" "username")
-    password=$(bashio::services "mqtt" "password")
+    HOST=$(bashio::services "mqtt" "host")
+    PORT=$(bashio::services "mqtt" "port")
+    USERNAME=$(bashio::services "mqtt" "username")
+    PASSWORD=$(bashio::services "mqtt" "password")
     {
         echo "homeassistant: true"
         echo "permit_join: false"
         echo "mqtt:"
         echo "  base_topic: zigbee2mqtt"
-        echo "  server: mqtt://$host:$port"
-        echo "  user: $username"
-        echo "  password: $password"
+        echo "  server: mqtt://${HOST}:${PORT}"
+        echo "  user: ${USERNAME}"
+        echo "  password: ${PASSWORD}"
         echo "serial:"
         echo "  port: null"
         echo "advanced:"
