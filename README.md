@@ -59,7 +59,7 @@ changes after initial configuration should be made in `configuration.yaml`
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
 
-Example add-on configuration:
+<!-- Example add-on configuration:
 
 ```json
 {
@@ -127,7 +127,7 @@ Disable LED of CC2531 USB sniffer
 ### Option: `cache_state`
 
 Home Assistant requires ALL attributes to be present in ALL MQTT messages send
-by the device. Should be set to `true`.
+by the device. Should be set to `true`. -->
 
 ## Changelog & Releases
 
