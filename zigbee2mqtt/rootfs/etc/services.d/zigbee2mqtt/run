@@ -5,7 +5,7 @@
 # ==============================================================================
 
 # Use share directory for configuration data
-export ZIGBEE2MQTT_CONFIG="/share/addon-zigbee2mqtt" 
+export ZIGBEE2MQTT_DATA="/share/addon-zigbee2mqtt" 
 
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
