@@ -5,35 +5,66 @@
 # ==============================================================================
 
 # Creates configuration folder if it does not exist.
-if ! bashio::fs.directory_exists '/share/addon-zigbee2mqtt'; then
-    bashio::log "Creating zigbee2mqtt folder in /share."
-    mkdir /share/addon-zigbee2mqtt \
-        || bashio::exit.nok "Could not create /share/addon-zigbee2mqtt."
+if ! bashio::fs.directory_exists '/config/zigbee2mqtt'; then
+    bashio::log.info "Creating zigbee2mqtt folder in /config."
+    mkdir /config/zigbee2mqtt \
+        || bashio::exit.nok "Could not create /config/zigbee2mqtt."
 fi
 
 # Creates configuration.yaml on first start.
-if ! bashio::fs.file_exists '/share/addon-zigbee2mqtt/configuration.yaml'; then
-    bashio::log "Creating configuration.yaml."
-    touch /share/addon-zigbee2mqtt/configuration.yaml \
-
+if ! bashio::fs.file_exists '/config/zigbee2mqtt/configuration.yaml'; then
+    bashio::log.info "Creating configuration.yaml..."
+    touch /config/zigbee2mqtt/configuration.yaml \
         || bashio::exit.nok "Could not create configuration.yaml."
 fi
 
+# Check for empty config file
+if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
+    if ! bashio::services.available "mqtt"; then
+        bashio::exit.nok "Home Assistant MQTT service is not available. Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
+    fi
+    bashio::log.info "Creating default configuration..."
+    host=$(bashio::services "mqtt" "host")
+    port=$(bashio::services "mqtt" "port")
+    username=$(bashio::services "mqtt" "username")
+    password=$(bashio::services "mqtt" "password")
+    {
+        echo "homeassistant: true"
+        echo "permit_join: false"
+        echo "mqtt:"
+        echo "  base_topic: zigbee2mqtt"
+        echo "  server: mqtt://$host:$port"
+        echo "  user: $username"
+        echo "  password: $password"
+        echo "serial:"
+        echo "  port: null"
+        echo "  adapter: null"
+        echo "advanced:"
+        echo "  log_output:"
+        echo "    - console"
+        # TODO: Change this key to GENERATE
+        echo "  network_key: [245, 104, 21, 151, 220, 30, 40, 58, 217, 85, 120, 20, 111, 144, 136, 128]"
+        echo "devices: devices.yaml"
+        echo "groups: groups.yaml"
+    } > /config/zigbee2mqtt/configuration.yaml \
+        || bashio::exit.nok "Default configuration failed! Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
+fi
+
 # Creates devices configuration files on first start.
-if ! bashio::fs.file_exists '/share/addon-zigbee2mqtt/devices.yaml'; then
-    bashio::log "Creating devices.yaml."
-    touch /share/addon-zigbee2mqtt/devices.yaml \
+if ! bashio::fs.file_exists '/config/zigbee2mqtt/devices.yaml'; then
+    bashio::log.info "Creating devices.yaml."
+    touch /config/zigbee2mqtt/devices.yaml \
         || bashio::exit.nok "Could not create devices.yaml."
 fi
 
 # Creates groups configuration files on first start.
-if ! bashio::fs.file_exists '/share/addon-zigbee2mqtt/groups.yaml'; then
-    bashio::log "Creating groups.yaml."
-    touch /share/addon-zigbee2mqtt/groups.yaml \
+if ! bashio::fs.file_exists '/config/zigbee2mqtt/groups.yaml'; then
+    bashio::log.info "Creating groups.yaml."
+    touch /config/zigbee2mqtt/groups.yaml \
         || bashio::exit.nok "Could not create groups.yaml."
 fi
 
 # Check for empty config file
-if [ ! -s '/share/addon-zigbee2mqtt/configuration.yaml' ]; then
+if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
     bashio::exit.nok "Your configuration.yaml is empty! Please add a configuration and restart the addon."
 fi
