@@ -18,12 +18,14 @@ if ! bashio::fs.file_exists '/config/zigbee2mqtt/configuration.yaml'; then
         || bashio::exit.nok "Could not create configuration.yaml."
 fi
 
-# Check for empty config file
+# Check for empty config file and creates default config
 if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
     if ! bashio::services.available "mqtt"; then
         bashio::exit.nok "Home Assistant MQTT service is not available. Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
     fi
     declare SERIAL_PORT
+    # TODO: detect common adapter types by name
+    # Check if Zigbee2MQTT should be doing this already.
     for DEVICE in $(bashio::hardware.serial); do
         if [[ ${DEVICE} == *"serial/by-id"* ]]; then
             SERIAL_PORT=${DEVICE}
@@ -46,6 +48,7 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
         echo "  password: ${PASSWORD}"
         echo "serial:"
         echo "  port: ${SERIAL_PORT}"
+        # TODO: Detect adapter type
         echo "advanced:"
         echo "  log_output:"
         echo "    - console"

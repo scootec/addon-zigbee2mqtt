@@ -1,7 +1,10 @@
 # TODO
 
-- [ ] Move config into config directory
-- [ ] change config to allow access to config directory
-- [ ] Add auto configutation on first run
-- [ ] Check correct storage path for configuration to be accessed
+- [x] Move config into config directory
+- [x] change config to allow access to config directory
+- [x] Add auto configutation on first run
+- [x] Check correct storage path for configuration to be accessed
 - [ ] Create way of supporting new devices using addon
+- [ ] Add vscode settings file for z2m directory in config
+- [ ] Update addon app armour profile
+- [ ] Add changelog and other community addons fields
