@@ -9,11 +9,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-    curl=7.72.0-r0 \
-    g++=10.2.0-r5 \
-    gcc=10.2.0-r5 \
-    git=2.28.0-r1 \
-    linux-headers=5.7.8-r0 \
+    curl=7.69.1-r1 \
+    g++=9.3.0-r2 \
+    gcc=9.3.0-r2 \
+    git=2.26.2-r0 \
+    linux-headers=5.4.5-r1 \
     make=4.3-r0 \
     python2=2.7.18-r0 \
     eudev=3.2.9-r3 \
