@@ -9,14 +9,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-    curl \
-    g++ \
-    gcc \
-    git \
-    linux-headers \
-    make \
-    python2 \
-    udev \
+    curl=7.72.0-r0 \
+    g++=10.2.0-r5 \
+    gcc=10.2.0-r5 \
+    git=2.28.0-r1 \
+    linux-headers=5.7.8-r0 \
+    make=4.3-r0 \
+    python2=2.7.18-r0 \
+    eudev=3.2.9-r3 \
     \
     && apk add --no-cache \
     nodejs=12.18.3-r0 \
