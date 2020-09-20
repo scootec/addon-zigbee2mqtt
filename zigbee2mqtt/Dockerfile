@@ -15,9 +15,10 @@ RUN apk add --no-cache --virtual .build-dependencies \
     git=2.26.2-r0 \
     linux-headers=5.4.5-r1 \
     make=4.3-r0 \
-    # python2=2.7.18-r0 \
-    python3-dev=3.8.5-r0 \
-    eudev=3.2.9-r3 \
+    python2=2.7.18-r0 \
+    # python3-dev=3.8.5-r0 \
+    # eudev=3.2.9-r3 \
+    udev \
     \
     && apk add --no-cache \
     nodejs=12.18.3-r0 \
