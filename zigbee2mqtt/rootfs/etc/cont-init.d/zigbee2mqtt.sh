@@ -53,22 +53,6 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
         echo "  log_output:"
         echo "    - console"
         echo "  network_key: GENERATE"
-        echo "devices: devices.yaml"
-        echo "groups: groups.yaml"
     } > /config/zigbee2mqtt/configuration.yaml \
         || bashio::exit.nok "Default configuration failed! Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
-fi
-
-# Creates devices configuration files on first start.
-if ! bashio::fs.file_exists '/config/zigbee2mqtt/devices.yaml'; then
-    bashio::log.info "Creating devices.yaml."
-    touch /config/zigbee2mqtt/devices.yaml \
-        || bashio::exit.nok "Could not create devices.yaml."
-fi
-
-# Creates groups configuration files on first start.
-if ! bashio::fs.file_exists '/config/zigbee2mqtt/groups.yaml'; then
-    bashio::log.info "Creating groups.yaml."
-    touch /config/zigbee2mqtt/groups.yaml \
-        || bashio::exit.nok "Could not create groups.yaml."
 fi
