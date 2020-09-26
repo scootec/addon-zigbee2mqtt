@@ -18,8 +18,8 @@ RUN apk add --no-cache --virtual .build-dependencies \
     eudev=3.2.9-r3 \
     \
     && apk add --no-cache \
-    nodejs=12.18.3-r0 \
-    npm=12.18.3-r0
+    nodejs=12.18.4-r0 \
+    npm=12.18.4-r0
 
 # Create work dir. Download latest release. Remove unnecessary directories.
 RUN mkdir -p /opt/zigbee2mqtt \
