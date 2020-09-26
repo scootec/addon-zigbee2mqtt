@@ -9,7 +9,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-    # curl=7.69.1-r1 \
     g++=9.3.0-r2 \
     gcc=9.3.0-r2 \
     git=2.26.2-r0 \
