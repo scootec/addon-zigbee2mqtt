@@ -6,7 +6,7 @@
 
 # Creates configuration folder if it does not exist.
 if ! bashio::fs.directory_exists '/config/zigbee2mqtt'; then
-    bashio::log.info "Creating zigbee2mqtt folder in /config."
+    bashio::log.info "Creating zigbee2mqtt folder in /config..."
     mkdir /config/zigbee2mqtt \
         || bashio::exit.nok "Could not create /config/zigbee2mqtt."
 fi
@@ -24,7 +24,7 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
         bashio::exit.nok "Home Assistant MQTT service is not available. Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
     fi
 
-    bashio::log.info "Creating default configuration..."
+    bashio::log.info "Creating default configuration using Home Assistant MQTT broker..."
     HOST=$(bashio::services "mqtt" "host")
     PORT=$(bashio::services "mqtt" "port")
     USERNAME=$(bashio::services "mqtt" "username")
@@ -44,6 +44,6 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
         echo "    - console"
         echo "  network_key: GENERATE"
     } > /config/zigbee2mqtt/configuration.yaml \
-        || bashio::exit.nok "Default configuration failed! Please add a configuration.yaml to /config/zigbee2mqtt and restart the addon."
+        || bashio::exit.nok "Default configuration failed! Please add a configuration.yaml to /config/zigbee2mqtt then restart the addon."
     bashio::exit.nok "Default configuration created. Please review the configuration.yaml in /config/zigbee2mqtt then restart the addon."
 fi
