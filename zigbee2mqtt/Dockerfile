@@ -1,6 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:8.0.3
-# hadolint ignore=DL3006
-FROM ${BUILD_FROM}
+FROM hassioaddons/base:8.0.3
 
 ENV ZIGBEE2MQTT_VERSION=1.15.0
 
