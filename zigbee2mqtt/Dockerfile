@@ -2,7 +2,7 @@ ARG BUILD_FROM=hassioaddons/base:8.0.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
-ENV ZIGBEE2MQTT_VERSION=1.14.4
+ENV ZIGBEE2MQTT_VERSION=1.15.0
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
