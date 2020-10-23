@@ -1,5 +1,5 @@
 {
-    "name": "Zigbee2mqtt Hass.io Add-on",
+    "name": "Zigbee2mqtt Home Assistant Add-on",
     "url": "https://github.com/scoootec/addon-zigbee2mqtt",
     "maintainer": "scoootec <example@example.com>"
 }
