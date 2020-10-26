@@ -1,4 +1,4 @@
-FROM hassioaddons/base:8.0.4
+FROM hassioaddons/base:8.0.5
 
 ENV ZIGBEE2MQTT_VERSION=1.15.0
 
