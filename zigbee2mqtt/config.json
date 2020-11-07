@@ -14,6 +14,10 @@
   "hassio_role": "default",
   "map": ["config:rw"],
   "services": ["mqtt:need"],
-  "options": {},
-  "schema": {}
+  "options": {
+    "zigbee_herdsman_debug": false
+  },
+  "schema": {
+    "zigbee_herdsman_debug": "bool?"
+  }
 }

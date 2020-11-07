@@ -7,6 +7,12 @@
 # Use share directory for configuration data
 export ZIGBEE2MQTT_DATA="/config/zigbee2mqtt"
 
+# Optionally Set Zigbee Herdsman Debug
+if bashio::config.true 'zigbee_herdsman_debug'; then
+    bashio::log.info "Zigbee Herdsman debug logging enabled"
+    export DEBUG="zigbee-herdsman:*"
+fi
+
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
 bashio::log.info 'Starting Zigbee2MQTT...'
