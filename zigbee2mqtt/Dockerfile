@@ -7,17 +7,17 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-    g++=9.3.0-r2 \
-    gcc=9.3.0-r2 \
-    git=2.26.2-r0 \
-    linux-headers=5.4.5-r1 \
-    make=4.3-r0 \
-    python3-dev=3.8.5-r0 \
-    eudev=3.2.9-r3 \
+    g++ \
+    gcc \
+    git \
+    linux-headers \
+    make \
+    python3-dev \
+    eudev \
     \
     && apk add --no-cache \
-    nodejs=12.18.4-r0 \
-    npm=12.18.4-r0
+    nodejs \
+    npm
 
 # Create work dir. Download latest release. Remove unnecessary directories.
 RUN mkdir -p /opt/zigbee2mqtt \
