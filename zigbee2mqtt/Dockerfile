@@ -1,6 +1,6 @@
 FROM hassioaddons/base:8.0.6
 
-ENV ZIGBEE2MQTT_VERSION=1.16.0
+ENV ZIGBEE2MQTT_VERSION=1.16.2
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
