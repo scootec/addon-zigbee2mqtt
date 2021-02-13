@@ -1,6 +1,6 @@
-FROM ghcr.io/hassio-addons/base/amd64:9.1.1
+FROM ghcr.io/hassio-addons/base/amd64:9.1.2
 
-ENV ZIGBEE2MQTT_VERSION=1.17.0
+ENV ZIGBEE2MQTT_VERSION=1.17.1
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
