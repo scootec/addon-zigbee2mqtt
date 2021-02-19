@@ -1,4 +1,4 @@
-FROM ghcr.io/hassio-addons/base/amd64:9.1.2
+FROM ghcr.io/hassio-addons/base/amd64:9.1.4
 
 ENV ZIGBEE2MQTT_VERSION=1.17.1
 
