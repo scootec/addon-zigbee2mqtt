@@ -1,6 +1,6 @@
 FROM ghcr.io/hassio-addons/base/amd64:10.0.0
 
-ENV ZIGBEE2MQTT_VERSION=1.20.0
+ENV ZIGBEE2MQTT_VERSION=1.21.0
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -25,22 +25,21 @@ RUN mkdir -p /opt/zigbee2mqtt \
     && curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "release.tar.gz" \
     && tar -xzvf "release.tar.gz" --strip-components=1 \
-    && find . \
-    -not -path './lib/*' \
-    -not -name 'index.js' \
-    -not -name 'package.json' \
-    -not -name 'npm-shrinkwrap.json' \
-    -delete \
-    && npm install \
+    && npm ci \
     --no-audit \
     --no-optional \
     --no-update-notifier \
     --only=production \
     --unsafe-perm \
-    \
+    && npm run build \
+    # Cleanup
     && npm cache clear --force \
-    \
-    && apk del --purge .build-dependencies
+    && apk del --purge .build-dependencies \
+    && find . \
+    -not -path './dist/*' \
+    -not -name 'index.js' \
+    -not -name 'package.json' \
+    -delete
 
 # Copy /etc
 COPY rootfs /
