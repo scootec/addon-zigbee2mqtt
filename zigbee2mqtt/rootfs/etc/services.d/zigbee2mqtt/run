@@ -7,6 +7,9 @@
 # Use share directory for configuration data
 export ZIGBEE2MQTT_DATA="/config/zigbee2mqtt"
 
+# Set Node to Production
+export NODE_ENV=production
+
 # Optionally Set Zigbee Herdsman Debug
 if bashio::config.true 'zigbee_herdsman_debug'; then
     bashio::log.info "Zigbee Herdsman debug logging enabled"
