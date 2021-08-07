@@ -16,10 +16,10 @@ RUN apk add --no-cache --virtual .build-dependencies \
     make \
     python3-dev \
     eudev \
+    npm \
     \
     && apk add --no-cache \
-    nodejs \
-    npm
+    nodejs
 
 # Create work dir. Download latest release. Remove unnecessary directories.
 RUN mkdir -p /opt/zigbee2mqtt \
