@@ -29,9 +29,9 @@ RUN mkdir -p /opt/zigbee2mqtt \
     --no-audit \
     --no-optional \
     --no-update-notifier \
-    --only=production \
     --unsafe-perm \
     && npm run build \
+    && npm prune --production \
     # Cleanup
     && npm cache clear --force \
     && apk del --purge .build-dependencies \
