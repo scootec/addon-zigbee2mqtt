@@ -41,6 +41,7 @@ RUN mkdir -p /opt/zigbee2mqtt \
     -not -path './dist/*' \
     -not -path './node_modules/*' \
     -not -name 'index.js' \
+    -not -name 'package.json' \
     -delete
 
 # Copy /etc
