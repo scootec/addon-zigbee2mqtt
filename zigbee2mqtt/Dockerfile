@@ -1,5 +1,7 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:10.0.0
-FROM ${BUILD_FROM}
+
+# Stage 1: Build
+FROM ${BUILD_FROM} as builder
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 ARG ZIGBEE2MQTT_VERSION=1.21.0
@@ -8,7 +10,7 @@ ARG ZIGBEE2MQTT_VERSION=1.21.0
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-RUN apk add --no-cache --virtual .build-dependencies \
+RUN apk add --no-cache \
     g++ \
     gcc \
     git \
@@ -16,12 +18,10 @@ RUN apk add --no-cache --virtual .build-dependencies \
     make \
     python3-dev \
     eudev \
-    npm \
-    \
-    && apk add --no-cache \
-    nodejs
+    nodejs \
+    npm
 
-# Create work dir. Download latest release. Remove unnecessary directories.
+# Create work dir. Download latest release.
 RUN mkdir -p /opt/zigbee2mqtt \
     && cd /opt/zigbee2mqtt \
     && curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
@@ -33,16 +33,27 @@ RUN mkdir -p /opt/zigbee2mqtt \
     --no-update-notifier \
     --unsafe-perm \
     && npm run build \
-    # Cleanup
-    && npm prune --production \
-    && npm cache clear --force \
-    && apk del --purge .build-dependencies \
-    && find . \
-    -not -path './dist/*' \
-    -not -path './node_modules/*' \
-    -not -name 'index.js' \
-    -not -name 'package.json' \
-    -delete
+    && npm prune --production
+
+# Stage 2: Production
+FROM ${BUILD_FROM}
+
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Setup base
+RUN mkdir -p /opt/zigbee2mqtt \
+    && apk add --no-cache \
+    nodejs
+
+# Copy from builder container
+COPY --from=builder \
+    /opt/zigbee2mqtt/dist \
+    /opt/zigbee2mqtt/node_modules \
+    /opt/zigbee2mqtt/index.js \
+    /opt/zigbee2mqtt/package.json \
+    # Destination Directory
+    /opt/zigbee2mqtt/    
 
 # Copy /etc
 COPY rootfs /
