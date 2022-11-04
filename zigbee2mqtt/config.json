@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2mqtt",
-  "version": "1.28.0",
+  "version": "1.28.1",
   "slug": "zigbee2mqtt",
   "description": "Zigbee2MQTT add-on by Scootec",
   "url": "https://github.com/scoootec/addon-zigbee2mqtt",
@@ -11,7 +11,7 @@
   "init": false,
   "arch": ["aarch64", "amd64", "armhf", "i386"],
   "boot": "auto",
-  "homeassistant": "2022.3.0",
+  "homeassistant": "2022.11.0",
   "map": ["config:rw"],
   "services": ["mqtt:need"],
   "options": {

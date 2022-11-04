@@ -1,8 +1,8 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.4
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.5
 FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
-ARG ZIGBEE2MQTT_VERSION=1.28.0
+ARG ZIGBEE2MQTT_VERSION=1.28.1
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
