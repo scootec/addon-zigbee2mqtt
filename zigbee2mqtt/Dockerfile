@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.6
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.7
 # Remember to update build file as well
 # Waiting on next base version to fix musl 
 FROM ${BUILD_FROM}
