@@ -1,4 +1,6 @@
 ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.6
+# Remember to update build file as well
+# Waiting on next base version to fix musl 
 FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
@@ -9,9 +11,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
-# Temporary to fix broken build
-    musl-utils \
-    musl \
     g++ \
     gcc \
     git \
