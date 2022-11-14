@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.6
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.2.4
 FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
