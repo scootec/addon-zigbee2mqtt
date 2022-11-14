@@ -10,8 +10,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Setup base
 RUN apk add --no-cache --virtual .build-dependencies \
 # Temporary to fix broken build
-    musl-utils=1.2.3-r2 \
-    musl=1.2.3-r2 \
+    musl-utils \
+    musl \
     g++ \
     gcc \
     git \
