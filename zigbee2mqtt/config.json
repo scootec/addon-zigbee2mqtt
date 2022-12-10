@@ -1,6 +1,6 @@
 {
   "name": "Zigbee2mqtt",
-  "version": "1.28.1-5",
+  "version": "1.28.4",
   "slug": "zigbee2mqtt",
   "description": "Zigbee2MQTT add-on by Scootec",
   "url": "https://github.com/scoootec/addon-zigbee2mqtt",
