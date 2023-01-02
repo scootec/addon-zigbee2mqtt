@@ -29,6 +29,14 @@ RUN mkdir -p /opt/zigbee2mqtt \
     && curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "release.tar.gz" \
     && tar -xzvf "release.tar.gz" --strip-components=1 \
+    # Serialport needs to be built from source for Alpine https://serialport.io/docs/9.x.x/guide-installation#alpine-linux
+    && npm ci serialport \
+    --build-from-source \
+    --no-audit \
+    --no-optional \
+    --no-update-notifier \
+    --unsafe-perm \
+    # Install remaining dependencies
     && npm ci \
     --no-audit \
     --no-optional \
