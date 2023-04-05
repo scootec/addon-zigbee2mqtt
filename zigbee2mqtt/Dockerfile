@@ -1,11 +1,11 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:13.1.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:13.2.0
 # https://github.com/hassio-addons/addon-base/releases
 # Remember to update build file as well
 # Waiting on next base version to fix musl 
 FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
-ARG ZIGBEE2MQTT_VERSION=1.30.1
+ARG ZIGBEE2MQTT_VERSION=1.30.3
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
