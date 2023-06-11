@@ -1,5 +1,5 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:14.0.0
-# https://github.com/hassio-addons/addon-base/releases
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:6.2.7
+# https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
 # Waiting on next base version to fix musl 
 FROM ${BUILD_FROM}
@@ -12,18 +12,15 @@ ARG ZIGBEE2MQTT_VERSION=1.31.2
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-RUN apk add --no-cache --virtual .build-dependencies \
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+    nodejs \
+    # Build deps
+    make \
     g++ \
     gcc \
-    git \
-    linux-headers \
-    make \
-    python3-dev \
-    eudev \
-    npm \
-    \
-    && apk add --no-cache \
-    nodejs
+    python3-dev
 
 # Create work dir. Download latest release. Remove unnecessary directories.
 RUN mkdir -p /opt/zigbee2mqtt \
@@ -38,18 +35,28 @@ RUN mkdir -p /opt/zigbee2mqtt \
     --no-update-notifier \
     --unsafe-perm \
     # Serialport needs to be rebuilt https://github.com/Koenkk/zigbee2mqtt/pull/15400
-    && npm rebuild --build-from-source \
+    # && npm rebuild --build-from-source \
     && npm run build \
     # Cleanup
     && npm prune --production \
     && npm cache clear --force \
-    && apk del --purge .build-dependencies \
     && find . \
     -not -path './dist/*' \
     -not -path './node_modules/*' \
     -not -name 'index.js' \
     -not -name 'package.json' \
-    -delete
+    -delete \
+    ## Cleanup build deps
+    && apt-get purge -y --auto-remove \
+    make \
+    g++ \
+    gcc \
+    python3-dev \
+    && rm -fr \
+    /root/.cache \
+    /tmp/* \
+    /var/{cache,log}/* \
+    /var/lib/apt/lists/*
 
 # Copy /etc
 COPY rootfs /
