@@ -6,7 +6,7 @@ FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
-ARG ZIGBEE2MQTT_VERSION=1.31.0
+ARG ZIGBEE2MQTT_VERSION=1.31.2
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
