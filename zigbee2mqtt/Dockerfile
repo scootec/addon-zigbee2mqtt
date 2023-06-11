@@ -40,12 +40,13 @@ RUN mkdir -p /opt/zigbee2mqtt \
     # Cleanup
     && npm prune --production \
     && npm cache clear --force \
-    && find . \
-    -not -path './dist/*' \
-    -not -path './node_modules/*' \
-    -not -name 'index.js' \
-    -not -name 'package.json' \
-    -delete \
+    # Replace this with a build container in the future
+    # && find . \
+    # -not -path './dist/*' \
+    # -not -path './node_modules/*' \
+    # -not -name 'index.js' \
+    # -not -name 'package.json' \
+    # -delete \
     ## Cleanup build deps
     && apt-get purge -y --auto-remove \
     make \
