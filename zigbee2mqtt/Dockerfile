@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.3.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.3.3
 # https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
 # Waiting on next base version to fix musl 
@@ -6,7 +6,7 @@ FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
-ARG ZIGBEE2MQTT_VERSION=1.35.3
+ARG ZIGBEE2MQTT_VERSION=1.36.0
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
