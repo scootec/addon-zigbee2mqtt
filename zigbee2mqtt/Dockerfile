@@ -3,6 +3,7 @@ ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.3.3
 # Remember to update build file as well
 # Waiting on next base version to fix musl 
 FROM ${BUILD_FROM}
+# Test commit
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
