@@ -11,7 +11,7 @@
   "init": false,
   "arch": ["aarch64", "amd64", "armhf", "i386"],
   "boot": "auto",
-  "homeassistant": "2023.8.0",
+  "homeassistant": "2024.9.0",
   "map": ["config:rw"],
   "services": ["mqtt:need"],
   "options": {
