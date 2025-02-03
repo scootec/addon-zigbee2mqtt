@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.6.2
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.7.0
 # https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
 # Waiting on next base version to fix musl 
@@ -7,7 +7,7 @@ FROM ${BUILD_FROM}
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
-ARG ZIGBEE2MQTT_VERSION=1.42.0
+ARG ZIGBEE2MQTT_VERSION=2.1.0
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -21,7 +21,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     make \
     g++ \
     gcc \
-    python3-dev
+    python3-dev \
+    && npm install -g pnpm
 
 # Create work dir. Download latest release. Remove unnecessary directories.
 RUN mkdir -p /opt/zigbee2mqtt \
@@ -30,17 +31,15 @@ RUN mkdir -p /opt/zigbee2mqtt \
     -o "release.tar.gz" \
     && tar -xzvf "release.tar.gz" --strip-components=1 \
     # Install remaining dependencies
-    && npm ci \
-    --no-audit \
+    && pnpm install \
+    --frozen-lockfile \
     --no-optional \
-    --no-update-notifier \
-    --unsafe-perm \
     # Serialport needs to be rebuilt https://github.com/Koenkk/zigbee2mqtt/pull/15400
-    # && npm rebuild --build-from-source \
-    && npm run build \
+    # && pnpm rebuild --build-from-source \
+    && pnpm run build \
     # Cleanup
-    && npm prune --production \
-    && npm cache clear --force \
+    && pnpm prune --production \
+    && pnpm store prune \
     # Replace this with a build container in the future
     # && find . \
     # -not -path './dist/*' \
