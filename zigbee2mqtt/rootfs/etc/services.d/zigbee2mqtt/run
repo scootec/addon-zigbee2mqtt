@@ -16,8 +16,18 @@ if bashio::config.true 'zigbee_herdsman_debug'; then
     export DEBUG="zigbee-herdsman:*"
 fi
 
+# Validate configuration exists
+if [[ ! -f "/config/zigbee2mqtt/configuration.yaml" ]]; then
+    bashio::exit.nok "Configuration file not found at /config/zigbee2mqtt/configuration.yaml"
+fi
+
+# Set proper permissions for zigbee2mqtt user
+chown -R zigbee2mqtt:zigbee2mqtt /config/zigbee2mqtt
+chmod -R 755 /config/zigbee2mqtt
+
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
 bashio::log.info 'Starting Zigbee2MQTT...'
 
-exec node index.js
+# Run as zigbee2mqtt user for security
+exec s6-setuidgid zigbee2mqtt node index.js

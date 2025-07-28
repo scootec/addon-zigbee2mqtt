@@ -29,6 +29,14 @@ if [ ! -s '/config/zigbee2mqtt/configuration.yaml' ]; then
     PORT=$(bashio::services "mqtt" "port")
     USERNAME=$(bashio::services "mqtt" "username")
     PASSWORD=$(bashio::services "mqtt" "password")
+    
+    # Validate MQTT connection parameters
+    if [[ -z "${HOST}" ]]; then
+        bashio::exit.nok "MQTT host is not configured"
+    fi
+    if [[ -z "${PORT}" ]]; then
+        bashio::exit.nok "MQTT port is not configured"
+    fi
     {
         echo "homeassistant: true"
         echo "permit_join: false"

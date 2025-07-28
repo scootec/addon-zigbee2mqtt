@@ -3,9 +3,54 @@
 # Home Assistant Community Add-on: Zigbee2MQTT 
 # Take down the S6 supervision tree when Zigbee2MQTT fails
 # ==============================================================================
-if [[ "${1}" -ne 0 ]] && [[ "${1}" -ne 256 ]]; then
-  bashio::log.warning "Zigbee2MQTT crashed, halting add-on"
-  exec /run/s6/basedir/bin/halt
-fi
 
-bashio::log.info "Zigbee2MQTT  stopped, restarting..."
+EXIT_CODE="${1}"
+
+case "${EXIT_CODE}" in
+  0)
+    bashio::log.info "Zigbee2MQTT stopped cleanly"
+    ;;
+  1)
+    bashio::log.error "Zigbee2MQTT exited with error code 1 (general error)"
+    exec /run/s6/basedir/bin/halt
+    ;;
+  2)
+    bashio::log.error "Zigbee2MQTT exited with error code 2 (configuration error)"
+    bashio::log.info "Please check your configuration.yaml file"
+    exec /run/s6/basedir/bin/halt
+    ;;
+  125|126|127)
+    bashio::log.error "Zigbee2MQTT failed to start (exit code: ${EXIT_CODE})"
+    exec /run/s6/basedir/bin/halt
+    ;;
+  128)
+    bashio::log.warning "Zigbee2MQTT received SIGINT, restarting..."
+    ;;
+  129)
+    bashio::log.warning "Zigbee2MQTT received SIGHUP, restarting..."
+    ;;
+  130)
+    bashio::log.warning "Zigbee2MQTT received SIGINT (Ctrl+C), restarting..."
+    ;;
+  131)
+    bashio::log.warning "Zigbee2MQTT received SIGQUIT, restarting..."
+    ;;
+  143)
+    bashio::log.warning "Zigbee2MQTT received SIGTERM, restarting..."
+    ;;
+  256)
+    bashio::log.info "Zigbee2MQTT stopped normally (exit code 256)"
+    ;;
+  *)
+    if [[ "${EXIT_CODE}" -gt 128 ]]; then
+      SIGNAL=$((EXIT_CODE - 128))
+      bashio::log.warning "Zigbee2MQTT killed by signal ${SIGNAL}, restarting..."
+    else
+      bashio::log.error "Zigbee2MQTT crashed with exit code ${EXIT_CODE}, halting add-on"
+      exec /run/s6/basedir/bin/halt
+    fi
+    ;;
+esac
+
+bashio::log.info "Zigbee2MQTT will restart in 5 seconds..."
+sleep 5

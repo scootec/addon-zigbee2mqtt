@@ -1,63 +1,69 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.8.1
+# Build stage
 # https://github.com/hassio-addons/addon-debian-base
-# Remember to update build file as well
-# Waiting on next base version to fix musl 
-FROM ${BUILD_FROM}
-# Test commit
+FROM ghcr.io/hassio-addons/debian-base:7.8.3 AS builder
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
-ARG ZIGBEE2MQTT_VERSION=2.2.1
+ARG ZIGBEE2MQTT_VERSION=2.3.0
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Setup base
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+# Setup Node.js 20 (LTS) and build dependencies
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     nodejs \
-    # Build deps
     make \
     g++ \
     gcc \
     python3-dev \
-    && npm install -g pnpm
+    ca-certificates \
+    curl \
+    && npm install -g pnpm \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create work dir. Download latest release. Remove unnecessary directories.
-RUN mkdir -p /opt/zigbee2mqtt \
-    && cd /opt/zigbee2mqtt \
-    && curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
+# Create work dir and download Zigbee2MQTT
+WORKDIR /opt/zigbee2mqtt
+RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSION}.tar.gz" \
     -o "release.tar.gz" \
-    && tar -xzvf "release.tar.gz" --strip-components=1 \
-    # Install remaining dependencies
-    && pnpm install \
-    --frozen-lockfile \
-    --no-optional \
-    # Serialport needs to be rebuilt https://github.com/Koenkk/zigbee2mqtt/pull/15400
-    # && pnpm rebuild --build-from-source \
+    && tar -xzf "release.tar.gz" --strip-components=1 \
+    && rm release.tar.gz
+
+# Install dependencies and build
+RUN pnpm install --frozen-lockfile --no-optional \
     && pnpm run build \
-    # Cleanup
     && pnpm prune --production \
-    && pnpm store prune \
-    # Replace this with a build container in the future
-    # && find . \
-    # -not -path './dist/*' \
-    # -not -path './node_modules/*' \
-    # -not -name 'index.js' \
-    # -not -name 'package.json' \
-    # -delete \
-    ## Cleanup build deps
-    && apt-get purge -y --auto-remove \
-    make \
-    g++ \
-    gcc \
-    python3-dev \
-    && rm -fr \
-    /root/.cache \
-    /tmp/* \
-    /var/{cache,log}/* \
-    /var/lib/apt/lists/*
+    && pnpm store prune
+
+# Runtime stage
+# https://github.com/hassio-addons/addon-debian-base
+# Remember to update build file as well
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:7.8.3
+FROM ${BUILD_FROM}
+
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Install only runtime dependencies
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+    nodejs \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /tmp/*
+
+# Create zigbee2mqtt user for security
+RUN useradd -r -s /bin/false -d /opt/zigbee2mqtt zigbee2mqtt
+
+# Copy built application from builder stage
+COPY --from=builder --chown=zigbee2mqtt:zigbee2mqtt /opt/zigbee2mqtt /opt/zigbee2mqtt
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8099/api/info || exit 1
 
 # Copy /etc
 COPY rootfs /
