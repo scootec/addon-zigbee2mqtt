@@ -57,11 +57,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && rm -rf /var/cache/apt/* \
     && rm -rf /tmp/*
 
-# Create zigbee2mqtt user for security
-RUN useradd -r -s /bin/false -d /opt/zigbee2mqtt zigbee2mqtt
-
 # Copy built application from builder stage
-COPY --from=builder --chown=zigbee2mqtt:zigbee2mqtt /opt/zigbee2mqtt /opt/zigbee2mqtt
+COPY --from=builder /opt/zigbee2mqtt /opt/zigbee2mqtt
 
 # Add health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \

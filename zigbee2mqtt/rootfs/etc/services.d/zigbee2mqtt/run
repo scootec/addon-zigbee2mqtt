@@ -21,13 +21,12 @@ if [[ ! -f "/config/zigbee2mqtt/configuration.yaml" ]]; then
     bashio::exit.nok "Configuration file not found at /config/zigbee2mqtt/configuration.yaml"
 fi
 
-# Set proper permissions for zigbee2mqtt user
-chown -R zigbee2mqtt:zigbee2mqtt /config/zigbee2mqtt
+# Set proper permissions for root user
 chmod -R 755 /config/zigbee2mqtt
 
 cd /opt/zigbee2mqtt || bashio::exit.nok "Could not change directory to Zigbee2mqtt"
 
 bashio::log.info 'Starting Zigbee2MQTT...'
 
-# Run as zigbee2mqtt user for security
-exec s6-setuidgid zigbee2mqtt node index.js
+# Run as root
+exec node index.js
