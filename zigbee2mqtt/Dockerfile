@@ -61,8 +61,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 COPY --from=builder /opt/zigbee2mqtt /opt/zigbee2mqtt
 
 # Add health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8099/api/info || exit 1
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+#     CMD curl -f http://localhost:8099/api/info || exit 1
 
 # Copy /etc
 COPY rootfs /
