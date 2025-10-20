@@ -1,18 +1,18 @@
 # Build stage
 # https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:8.1.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:8.1.4
 FROM ${BUILD_FROM} AS builder
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
-ARG ZIGBEE2MQTT_VERSION=2.6.1
+ARG ZIGBEE2MQTT_VERSION=2.6.2
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup Node.js 20 (LTS) and build dependencies
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     nodejs \
@@ -41,14 +41,14 @@ RUN pnpm install --frozen-lockfile --no-optional \
 # Runtime stage
 # https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:8.1.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:8.1.4
 FROM ${BUILD_FROM}
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install only runtime dependencies
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     nodejs \
