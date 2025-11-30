@@ -48,7 +48,11 @@ If any versions need updating:
 - Line 14: Update `"homeassistant"` if requirements changed
 - Line 3: Update `"version"` using format: `"${ZIGBEE2MQTT_VERSION}-${ADDON_VERSION}"`
 
-**Note**: This project does not use a CHANGELOG.md file. All version changes are documented using GitHub Releases following the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
+#### Update zigbee2mqtt/CHANGELOG.md:
+- Add a new version entry with the version number and date
+- List all changes in the appropriate categories (Added, Changed, Fixed, etc.)
+- Update the comparison links at the bottom of the file
+- Follow the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format
 
 ### 6. Calculate New Add-on Version
 
@@ -66,25 +70,10 @@ Provide a summary of all changes made:
 - Home Assistant minimum: OLD → NEW (if changed)
 - Add-on version: OLD → NEW
 
-### 8. Commit and Release
+### 8. Next Steps
 
-After making all updates:
-
-1. Show the changes to the user with `git diff`
-2. Ask the user to confirm if the changes look good to commit
-3. If confirmed:
-   - Commit the changes with message: `"Update to version ${NEW_VERSION}"`
-   - Add detailed commit body listing all component updates
-   - Push to the remote repository
-   - Create a GitHub release using `gh release create` with:
-     - Tag: `v${NEW_VERSION}`
-     - Title: `v${NEW_VERSION}`
-     - Release notes formatted following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) standard:
-       ```
-       ## Changed
-       - Updated Zigbee2MQTT to version X.X.X (if changed)
-       - Updated base image to X.X.X (if changed)
-       - Updated Node.js to version XX (if changed)
-       - Updated Home Assistant minimum to YYYY.M.0 (if changed)
-       ```
-4. If user declines, remind them they can commit and release manually later
+Remind the user to:
+1. Review changes with `git diff`
+2. Test the build locally
+3. Commit changes
+4. Create a release
