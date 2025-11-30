@@ -48,6 +48,12 @@ If any versions need updating:
 - Line 14: Update `"homeassistant"` if requirements changed
 - Line 3: Update `"version"` using format: `"${ZIGBEE2MQTT_VERSION}-${ADDON_VERSION}"`
 
+#### Update zigbee2mqtt/CHANGELOG.md:
+- Add a new entry under `## [Unreleased]` section with the new version number and date
+- List all changes in the appropriate categories (Added, Changed, Fixed, etc.)
+- Update the comparison links at the bottom of the file
+- Follow the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format
+
 ### 6. Calculate New Add-on Version
 
 The add-on version format is: `${ZIGBEE2MQTT_VERSION}-${ADDON_VERSION}`
