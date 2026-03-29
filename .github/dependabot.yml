@@ -1,0 +1,21 @@
+---
+version: 2
+updates:
+  - package-ecosystem: "docker"
+    directory: "/zigbee2mqtt"
+    schedule:
+      interval: "daily"
+      time: "06:00"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "chore"
