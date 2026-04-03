@@ -1,12 +1,12 @@
 # Build stage
 # https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.2.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.3.0
 FROM ${BUILD_FROM} AS builder
 
 # Set Zigbee2MQTT Version. Needs to be after FROM
 # https://github.com/Koenkk/zigbee2mqtt/releases
-ARG ZIGBEE2MQTT_VERSION=2.9.1
+ARG ZIGBEE2MQTT_VERSION=2.9.2
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -41,7 +41,7 @@ RUN pnpm install --frozen-lockfile --no-optional \
 # Runtime stage
 # https://github.com/hassio-addons/addon-debian-base
 # Remember to update build file as well
-ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.2.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/debian-base:9.3.0
 FROM ${BUILD_FROM}
 
 # Set shell
