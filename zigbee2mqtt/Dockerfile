@@ -33,7 +33,7 @@ RUN curl -sL "https://github.com/Koenkk/zigbee2mqtt/archive/${ZIGBEE2MQTT_VERSIO
     && rm release.tar.gz
 
 # Install dependencies and build
-RUN pnpm install --frozen-lockfile --no-optional \
+RUN pnpm install --frozen-lockfile \
     && pnpm run build \
     && pnpm prune --production \
     && pnpm store prune
