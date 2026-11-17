@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.3-2] - 2026-11-18
+
+### Fixed
+
+- Fixed build failure caused by `--no-optional` skipping the platform-specific
+  TypeScript 7 native compiler package required by Zigbee2MQTT 2.14.3
+
 ## [2.14.3-1] - 2026-11-17
 
 ### Changed
